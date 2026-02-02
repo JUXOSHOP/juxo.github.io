@@ -13,7 +13,7 @@
         align-items:center; 
         justify-content:center; 
         padding:6px 20px; 
-        background: linear-gradient(90deg, #00b4d8, #48cae4, #ff6bcb); 
+        background: linear-gradient(90deg, #ff6bcb, #00b4d8, #48cae4); /* Reflejo colores del logo */
         color:white;
     }
     header img {
@@ -24,21 +24,23 @@
 
     /* Navegación */
     nav {
-        background:#00b4d8; /* Turquesa juvenil */
-        padding:10px;
+        background: linear-gradient(90deg, #ff6bcb, #00b4d8, #48cae4); /* Mismo degradado que header */
+        padding:8px;
         text-align:center;
+        border-bottom: 2px solid #0077a3;
     }
     nav a {
         color:white;
         margin:0 12px;
         text-decoration:none;
         font-weight:bold;
-        padding:6px 10px;
+        padding:6px 12px;
         border-radius:4px;
-        transition: background 0.2s;
+        transition: background 0.2s, transform 0.2s;
     }
     nav a:hover {
-        background:#48cae4; /* Hover más claro */
+        background: rgba(255,255,255,0.2);
+        transform: scale(1.1);
     }
     
     /* Productos */
@@ -59,7 +61,7 @@
     }
 
     /* Footer */
-    footer {background:#00b4d8; color:white; text-align:center; padding:10px; margin-top:30px;}
+    footer {background: linear-gradient(90deg, #ff6bcb, #00b4d8, #48cae4); color:white; text-align:center; padding:10px; margin-top:30px;}
 </style>
 </head>
 <body>
