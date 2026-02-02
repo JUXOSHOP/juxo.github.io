@@ -13,11 +13,11 @@
         align-items:center; 
         justify-content:center; /* Centrado del logo */
         padding:6px 20px;  /* Barra fina */
-        background: linear-gradient(90deg, #00b4d8, #48cae4); /* Azul turquesa degradado */
+        background: linear-gradient(90deg, #00b4d8, #48cae4, #ff6bcb); /* Azul turquesa + fucsia */
         color:white;
     }
     header img {
-        height:150px; /* Logo más grande */
+        height:150px; /* Logo grande */
         width:auto;   
         object-fit:contain;
     }
@@ -36,11 +36,15 @@
         margin-top:8px; 
         padding:8px 12px; 
         border:none; 
-        background:#28a745; 
+        background:#ff6b3c; /* Botón naranja juvenil */
         color:white; 
-        border-radius:4px; 
+        border-radius:6px; 
         cursor:pointer; 
         font-weight:bold;
+        transition: transform 0.2s;
+    }
+    .producto button:hover {
+        transform: scale(1.1); /* Efecto divertido al pasar el mouse */
     }
 
     /* Footer */
