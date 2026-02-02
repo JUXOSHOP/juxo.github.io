@@ -1,6 +1,8 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Juxo Shop</title>
+<title>JUXO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     body {font-family: Arial, sans-serif; margin:0; background:#f9f9f9;}
@@ -19,5 +21,99 @@
     }
     nav {background:#005b9e; padding:10px; text-align:center;}
     nav a {color:white; margin:0 12px; text-decoration:none; font-weight:bold;}
+    .productos {display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:15px; padding:20px;}
+    .producto {background:white; border-radius:8px; padding:12px; box-shadow:0 2px 4px rgba(0,0,0,0.1); text-align:center;}
+    .producto img {width:100%; height:140px; object-fit:cover; border-radius:6px;}
+    .producto h3 {font-size:18px; margin:8px 0 4px 0;}
+    .producto p {margin:4px 0; color:#333;}
+    .producto button {margin-top:8px; padding:8px 12px; border:none; background:#28a745; color:white; border-radius:4px; cursor:pointer; font-weight:bold;}
+    footer {background:#0072bc; color:white; text-align:center; padding:10px; margin-top:30px;}
 </style>
 </head>
+<body>
+
+<header>
+    <img src="logo.png" alt="Logo JUXO">
+</header>
+
+<nav>
+    <a href="#golosinas">Golosinas</a>
+    <a href="#bebidas">Bebidas</a>
+    <a href="#perfumeria">Perfumería</a>
+    <a href="#tabaqueria">Tabaquería</a>
+    <a href="#electro">Electrodomésticos</a>
+    <a href="#hogar">Hogar</a>
+</nav>
+
+<section id="golosinas" class="productos">
+    <div class="producto">
+        <img src="https://via.placeholder.com/150">
+        <h3>Chocolate</h3>
+        <p>$120</p>
+        <button onclick="window.open('https://wa.me/5491123456789?text=Hola,%20quiero%20comprar%20Chocolate%20($120)', '_blank')">Comprar</button>
+    </div>
+    <div class="producto">
+        <img src="https://via.placeholder.com/150">
+        <h3>Caramelos</h3>
+        <p>$85</p>
+        <button onclick="window.open('https://wa.me/5491123456789?text=Hola,%20quiero%20comprar%20Caramelos%20($85)', '_blank')">Comprar</button>
+    </div>
+</section>
+
+<section id="bebidas" class="productos">
+    <div class="producto">
+        <img src="https://via.placeholder.com/150">
+        <h3>Gaseosa</h3>
+        <p>$220</p>
+        <button onclick="window.open('https://wa.me/5491123456789?text=Hola,%20quiero%20comprar%20Gaseosa%20($220)', '_blank')">Comprar</button>
+    </div>
+    <div class="producto">
+        <img src="https://via.placeholder.com/150">
+        <h3>Jugo</h3>
+        <p>$180</p>
+        <button onclick="window.open('https://wa.me/5491123456789?text=Hola,%20quiero%20comprar%20Jugo%20($180)', '_blank')">Comprar</button>
+    </div>
+</section>
+
+<section id="perfumeria" class="productos">
+    <div class="producto">
+        <img src="https://via.placeholder.com/150">
+        <h3>Perfume</h3>
+        <p>$760</p>
+        <button onclick="window.open('https://wa.me/5491123456789?text=Hola,%20quiero%20comprar%20Perfume%20($760)', '_blank')">Comprar</button>
+    </div>
+</section>
+
+<section id="tabaqueria" class="productos">
+    <div class="producto">
+        <img src="https://via.placeholder.com/150">
+        <h3>Encendedor</h3>
+        <p>$240</p>
+        <button onclick="window.open('https://wa.me/5491123456789?text=Hola,%20quiero%20comprar%20Encendedor%20($240)', '_blank')">Comprar</button>
+    </div>
+</section>
+
+<section id="electro" class="productos">
+    <div class="producto">
+        <img src="https://via.placeholder.com/150">
+        <h3>Licuadora</h3>
+        <p>$2.100</p>
+        <button onclick="window.open('https://wa.me/5491123456789?text=Hola,%20quiero%20comprar%20Licuadora%20($2100)', '_blank')">Comprar</button>
+    </div>
+</section>
+
+<section id="hogar" class="productos">
+    <div class="producto">
+        <img src="https://via.placeholder.com/150">
+        <h3>Sartén</h3>
+        <p>$950</p>
+        <button onclick="window.open('https://wa.me/5491123456789?text=Hola,%20quiero%20comprar%20Sartén%20($950)', '_blank')">Comprar</button>
+    </div>
+</section>
+
+<footer>
+    © 2026 JUXO
+</footer>
+
+</body>
+</html>
