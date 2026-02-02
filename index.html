@@ -6,11 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     body {font-family: Arial, sans-serif; margin:0; background:#f9f9f9;}
+    
+    /* Header */
     header {
         display:flex; 
         align-items:center; 
-        justify-content:flex-start; 
-        padding:15px 20px; 
+        justify-content:center; /* Centrado del logo */
+        padding:8px 20px;  /* Barra azul más delgada */
         background:#0072bc; 
         color:white;
     }
@@ -19,14 +21,29 @@
         width:250px; 
         object-fit:contain;
     }
+
+    /* Navegación */
     nav {background:#005b9e; padding:10px; text-align:center;}
     nav a {color:white; margin:0 12px; text-decoration:none; font-weight:bold;}
+    
+    /* Productos */
     .productos {display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:15px; padding:20px;}
     .producto {background:white; border-radius:8px; padding:12px; box-shadow:0 2px 4px rgba(0,0,0,0.1); text-align:center;}
     .producto img {width:100%; height:140px; object-fit:cover; border-radius:6px;}
     .producto h3 {font-size:18px; margin:8px 0 4px 0;}
     .producto p {margin:4px 0; color:#333;}
-    .producto button {margin-top:8px; padding:8px 12px; border:none; background:#28a745; color:white; border-radius:4px; cursor:pointer; font-weight:bold;}
+    .producto button {
+        margin-top:8px; 
+        padding:8px 12px; 
+        border:none; 
+        background:#28a745; 
+        color:white; 
+        border-radius:4px; 
+        cursor:pointer; 
+        font-weight:bold;
+    }
+
+    /* Footer */
     footer {background:#0072bc; color:white; text-align:center; padding:10px; margin-top:30px;}
 </style>
 </head>
