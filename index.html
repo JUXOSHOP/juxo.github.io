@@ -1,0 +1,88 @@
+index.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda Juxo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {font-family: Arial, sans-serif; margin: 0; background:#f2f2f2;}
+        header {background:#111; color:white; text-align:center; padding:20px;}
+        nav {background:#333; padding:10px; text-align:center;}
+        nav a {color:white; margin:0 10px; text-decoration:none; font-weight:bold;}
+        section {padding:20px;}
+        h2 {border-bottom:2px solid #ddd; padding-bottom:5px;}
+        .productos {display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:15px; margin-top:15px;}
+        .producto {background:white; padding:10px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); text-align:center;}
+        .producto img {width:100%; height:120px; object-fit:cover;}
+        button {margin-top:8px; padding:6px 10px; border:none; background:#28a745; color:white; border-radius:4px; cursor:pointer;}
+        footer {background:#111; color:white; text-align:center; padding:10px; margin-top:30px;}
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🛍️ Tienda Juxo</h1>
+    <p>Compra fácil y rápido</p>
+</header>
+
+<nav>
+    <a href="#golosinas">Golosinas</a>
+    <a href="#bebidas">Bebidas</a>
+    <a href="#perfumeria">Perfumería</a>
+    <a href="#tabaqueria">Tabaquería</a>
+    <a href="#electro">Electrodomésticos</a>
+    <a href="#hogar">Hogar</a>
+</nav>
+
+<section id="golosinas">
+    <h2>🍬 Golosinas</h2>
+    <div class="productos">
+        <div class="producto"><img src="https://via.placeholder.com/150"><p>Chocolate</p><button>Comprar</button></div>
+        <div class="producto"><img src="https://via.placeholder.com/150"><p>Caramelos</p><button>Comprar</button></div>
+    </div>
+</section>
+
+<section id="bebidas">
+    <h2>🥤 Bebidas</h2>
+    <div class="productos">
+        <div class="producto"><img src="https://via.placeholder.com/150"><p>Gaseosa</p><button>Comprar</button></div>
+        <div class="producto"><img src="https://via.placeholder.com/150"><p>Jugo</p><button>Comprar</button></div>
+    </div>
+</section>
+
+<section id="perfumeria">
+    <h2>💄 Perfumería</h2>
+    <div class="productos">
+        <div class="producto"><img src="https://via.placeholder.com/150"><p>Perfume</p><button>Comprar</button></div>
+    </div>
+</section>
+
+<section id="tabaqueria">
+    <h2>🚬 Tabaquería</h2>
+    <div class="productos">
+        <div class="producto"><img src="https://via.placeholder.com/150"><p>Encendedor</p><button>Comprar</button></div>
+    </div>
+</section>
+
+<section id="electro">
+    <h2>🔌 Electrodomésticos</h2>
+    <div class="productos">
+        <div class="producto"><img src="https://via.placeholder.com/150"><p>Licuadora</p><button>Comprar</button></div>
+    </div>
+</section>
+
+<section id="hogar">
+    <h2>🏠 Artículos para el Hogar</h2>
+    <div class="productos">
+        <div class="producto"><img src="https://via.placeholder.com/150"><p>Sartén</p><button>Comprar</button></div>
+    </div>
+</section>
+
+<footer>
+    © 2026 Tienda Juxo
+</footer>
+
+</body>
+</html>
+
