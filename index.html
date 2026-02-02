@@ -6,10 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     body {font-family: Arial, sans-serif; margin:0; background:#f9f9f9;}
-    header {display:flex; align-items:center; justify-content:space-between; padding:15px 20px; background:#0072bc; color:white;}
-    header img {height:50px; width:150px; object-fit:contain;}
-    header h1 {margin:0 15px; font-size:26px; flex-grow:1;}
-    .search-bar input {padding:8px; width:200px; border-radius:4px; border:none;}
+    header {
+        display:flex; 
+        align-items:center; 
+        justify-content:flex-start; 
+        padding:15px 20px; 
+        background:#0072bc; 
+        color:white;
+    }
+    header img {
+        height:80px; 
+        width:200px; 
+        object-fit:contain;
+    }
     nav {background:#005b9e; padding:10px; text-align:center;}
     nav a {color:white; margin:0 12px; text-decoration:none; font-weight:bold;}
     .productos {display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:15px; padding:20px;}
@@ -25,10 +34,6 @@
 
 <header>
     <img src="logo.png" alt="Logo JUXO">
-    <h1>🛍️ Tienda Juxo</h1>
-    <div class="search-bar">
-        <input type="text" placeholder="Buscar productos…">
-    </div>
 </header>
 
 <nav>
