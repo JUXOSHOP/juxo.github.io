@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>JUXO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+}
+
+/* BANNER */
+header {
+    background: linear-gradient(90deg, #d96acb 0%, #7a8fdc 45%, #2ec4d6 100%);
+    text-align: center;
+    padding: 30px 0;
+}
+
+header h1 {
+    color: white;
+    margin: 0;
+    font-size: 40px;
+}
+
+/* PRODUCTOS */
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 30px;
+}
+
+.producto {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.producto img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.precio {
+    color: red;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.stock {
+    color: green;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+button {
+    background: black;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>JUXO</h1>
+</header>
+
+<section class="productos">
+
+<div class="producto">
+    <img src="imagenes/producto-ejemplo.jpg" alt="Producto ejemplo">
+    <h3>Producto Ejemplo</h3>
+    <div class="precio">$100</div>
+    <div class="stock">Disponible</div>
+    <button>Comprar</button>
+</div>
+
+</section>
+
+</body>
+</html>
