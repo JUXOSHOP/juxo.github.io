@@ -2,25 +2,24 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
+    background: #ebebeb;
 }
 
-/* HEADER ESTILO SUPERMERCADO */
+/* HEADER ESTILO MERCADO LIBRE */
 header {
-    background: white;
+    background: #ffe600;
     padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 header h1 {
     margin: 0;
-    font-size: 36px;
-    color: #d50000;
+    font-size: 32px;
     font-weight: bold;
+    color: #333;
 }
 
-/* GRID PRODUCTOS */
+/* CONTENEDOR PRODUCTOS */
 .productos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -28,18 +27,17 @@ header h1 {
     padding: 30px;
 }
 
-/* TARJETA PRODUCTO */
+/* TARJETA */
 .producto {
     background: white;
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 15px;
     text-align: center;
     transition: 0.2s ease;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #ddd;
 }
 
 .producto:hover {
-    transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
@@ -49,6 +47,41 @@ header h1 {
     object-fit: contain;
 }
 
-/* JUXO */
+/* NOMBRE PRODUCTO */
 .producto h3 {
-    font-size: 14px
+    font-size: 14px;
+    color: #333;
+    min-height: 40px;
+}
+
+/* PRECIO */
+.precio {
+    font-size: 22px;
+    font-weight: bold;
+    color: #000;
+    margin: 10px 0 5px 0;
+}
+
+/* STOCK */
+.stock {
+    color: #00a650;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* BOTÓN */
+button {
+    background: #3483fa;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+button:hover {
+    background: #2968c8;
+}
+</style>
