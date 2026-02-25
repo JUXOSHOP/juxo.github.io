@@ -23,37 +23,25 @@ header {
 }
 
 .logo {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: bold;
     color: #13c1ac;
 }
 
+.search-bar {
+    flex: 1;
+    margin: 0 30px;
+}
+
 .search-bar input {
-    padding: 10px 15px;
-    border-radius: 20px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
     border: 1px solid #ddd;
-    width: 250px;
+    font-size: 14px;
 }
 
-/* CATEGORÍAS */
-.categorias {
-    display: flex;
-    gap: 15px;
-    padding: 15px 30px;
-    background: white;
-    border-bottom: 1px solid #eee;
-}
-
-.categorias button {
-    background: #13c1ac;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-/* GRID */
+/* GRID PRODUCTOS */
 .productos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -61,6 +49,7 @@ header {
     padding: 30px;
 }
 
+/* TARJETA */
 .producto {
     background: white;
     border-radius: 12px;
@@ -74,23 +63,30 @@ header {
 
 .producto img {
     width: 100%;
-    height: 150px;
+    height: 160px;
     object-fit: contain;
+    border-radius: 10px;
 }
 
+/* NOMBRE */
 .producto h3 {
     font-size: 14px;
     margin: 10px 0 5px 0;
+    color: #333;
 }
 
+/* PRECIO */
 .precio {
     font-size: 18px;
     font-weight: bold;
+    color: #222;
 }
 
+/* DISPONIBLE */
 .stock {
     color: #00a884;
     font-size: 13px;
+    margin-top: 5px;
 }
 </style>
 </head>
@@ -98,60 +94,10 @@ header {
 <body>
 
 <header>
-<div class="logo">JUXO</div>
-<div class="search-bar">
-<input type="text" id="buscador" placeholder="Buscar productos..." onkeyup="buscar()">
-</div>
+    <div class="logo">JUXO</div>
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar productos...">
+    </div>
 </header>
 
-<div class="categorias">
-<button onclick="filtrar('todos')">Todos</button>
-<button onclick="filtrar('kiosco')">Kiosco</button>
-<button onclick="filtrar('snacks')">Snacks</button>
-<button onclick="filtrar('bebidas')">Bebidas</button>
-<button onclick="filtrar('almacen')">Almacén</button>
-</div>
-
-<section class="productos" id="productos">
-
-<!-- EJEMPLO DE PRODUCTO -->
-<div class="producto kiosco">
-<img src="imagenes/alfajor-fantoche-simple-day-50g.jpg">
-<h3>Alfajor Fantoche Simple Day 50g</h3>
-<div class="precio">$1.200</div>
-<div class="stock">Disponible</div>
-</div>
-
-<div class="producto bebidas">
-<img src="imagenes/juguito-pepito-triple-sabor.jpg">
-<h3>Juguito Pepito Triple Sabor</h3>
-<div class="precio">$700</div>
-<div class="stock">Disponible</div>
-</div>
-
-</section>
-
-<script>
-function filtrar(categoria) {
-    let productos = document.querySelectorAll('.producto');
-    productos.forEach(p => {
-        if (categoria === 'todos') {
-            p.style.display = "block";
-        } else {
-            p.style.display = p.classList.contains(categoria) ? "block" : "none";
-        }
-    });
-}
-
-function buscar() {
-    let input = document.getElementById("buscador").value.toLowerCase();
-    let productos = document.querySelectorAll('.producto');
-    productos.forEach(p => {
-        let texto = p.innerText.toLowerCase();
-        p.style.display = texto.includes(input) ? "block" : "none";
-    });
-}
-</script>
-
-</body>
-</html>
+<section class="productos">
