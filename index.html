@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda estilo Walapop</title>
+<title>Tienda con Carrito Flotante</title>
 <style>
 body { font-family: Arial; background: #f4f4f4; margin: 0; padding: 20px; }
-h1 { text-align: center; }
+h1 { text-align: center; margin-bottom: 20px; }
 #buscar { width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
 #categorias { text-align: center; margin-bottom: 20px; }
 .boton-categoria { padding: 8px 12px; margin: 5px; cursor: pointer; border: none; background: #007bff; color: #fff; border-radius: 5px; }
@@ -14,6 +14,7 @@ h1 { text-align: center; }
 .boton-categoria:hover { background: #0056b3; }
 
 #productos { display: grid; grid-template-columns: repeat(auto-fill,minmax(180px,1fr)); gap: 15px; }
+
 .producto { background: #fff; border-radius: 10px; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
 .producto img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
 .producto h3 { font-size: 16px; margin: 5px 0; }
@@ -22,12 +23,13 @@ h1 { text-align: center; }
 .agregar { padding: 5px 10px; background: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
 .agregar:hover { background: #0056b3; }
 
-#carrito { margin-top: 30px; background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-#carrito h3 { margin-top: 0; }
-#listaCarrito { list-style: none; padding: 0; margin: 0; }
-#listaCarrito li { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid #eee; }
+/* CARRITO FLOTANTE */
+#carrito { position: fixed; top: 20px; right: 20px; width: 250px; background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 999; }
+#carrito h3 { margin-top: 0; font-size: 18px; text-align: center; }
+#listaCarrito { list-style: none; padding: 0; margin: 0; max-height: 200px; overflow-y: auto; }
+#listaCarrito li { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid #eee; font-size: 14px; }
 #listaCarrito button { background: red; color: #fff; border: none; border-radius: 5px; cursor: pointer; padding: 2px 5px; }
-#total { font-weight: bold; margin-top: 10px; }
+#total { font-weight: bold; margin-top: 10px; text-align: center; }
 #comprar { margin-top: 10px; padding: 10px; background: #ff9900; color: #fff; border: none; cursor: pointer; font-size: 16px; border-radius: 5px; width: 100%; }
 #comprar:hover { background: #cc7a00; }
 </style>
