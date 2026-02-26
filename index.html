@@ -3,425 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Golosinas - Estilo Wallapop</title>
+    <title>GoloShop | Estilo Wallapop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #007bff; /* Azul suave */
-            --secondary-color: #ff9900; /* Naranja para acciones */
-            --background-light: #f7f7f7; /* Fondo muy claro */
-            --text-dark: #333; /* Texto oscuro */
-            --text-gray: #666; /* Texto secundario */
-            --border-light: #eee; /* Borde sutil */
-            --shadow-light: rgba(0,0,0,0.08); /* Sombra muy suave */
+            --wallapop-green: #13c1ac;
+            --text-dark: #253238;
+            --bg-gray: #f7f9fa;
+            --border-color: #e0e6e9;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--background-light);
-            margin: 0;
-            padding: 20px;
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background: var(--bg-gray); 
+            margin: 0; 
+            padding-top: 85px; 
             color: var(--text-dark);
-            display: flex; /* Para organizar el contenido principal y el carrito */
+        }
+
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 75px;
+            background: #fff;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: flex-start;
-            padding-right: 300px; /* Deja espacio para el carrito (ancho del carrito + margen) */
-            box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+            padding: 0 10%;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+            z-index: 1000;
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: var(--text-dark);
-            font-size: 2.2em;
-            font-weight: 600;
-        }
+        .logo { font-size: 24px; font-weight: 800; color: var(--wallapop-green); text-decoration: none; }
 
-        .contenido-principal {
-            flex-grow: 1; /* Permite que ocupe el espacio restante */
-            max-width: 100%; /* Evita que el contenido principal se desborde */
-        }
+        .search-bar { flex-grow: 1; margin: 0 30px; position: relative; }
 
         #buscar {
-            width: calc(100% - 20px); /* Ajusta el ancho por el padding */
-            padding: 12px 15px;
-            margin-bottom: 25px;
-            font-size: 1em;
-            border-radius: 8px;
-            border: 1px solid var(--border-light);
-            box-shadow: 0 2px 5px var(--shadow-light);
-            transition: all 0.3s ease;
-        }
-        #buscar:focus {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            background: #f2f4f5;
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
         }
 
-        #categorias {
-            text-align: center;
-            margin-bottom: 30px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
+        #buscar:focus { background: #fff; border-color: var(--wallapop-green); }
+
+        .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #888; }
+
+        .btn-carrito-nav { position: relative; background: none; border: none; font-size: 22px; cursor: pointer; }
+
+        .cart-badge {
+            position: absolute; top: -8px; right: -10px;
+            background: var(--wallapop-green); color: white;
+            font-size: 11px; padding: 2px 6px; border-radius: 12px;
         }
+
+        #categorias { display: flex; justify-content: center; gap: 10px; padding: 20px; overflow-x: auto; }
 
         .boton-categoria {
-            padding: 10px 18px;
-            cursor: pointer;
-            border: none;
-            background: #e0e0e0;
-            color: var(--text-dark);
-            border-radius: 20px; /* Más redondeado */
-            font-size: 0.95em;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            padding: 10px 18px; border: 1px solid var(--border-color);
+            background: #fff; border-radius: 20px; cursor: pointer; white-space: nowrap;
         }
-        .boton-categoria.activo {
-            background: var(--primary-color);
-            color: #fff;
-            box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3);
-        }
-        .boton-categoria:hover:not(.activo) {
-            background: #d0d0d0;
-            transform: translateY(-2px);
-        }
+
+        .boton-categoria.activo { background: var(--wallapop-green); color: white; border-color: var(--wallapop-green); }
 
         #productos {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Productos un poco más grandes */
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px; padding: 0 10% 50px;
         }
 
         .producto {
-            background: #fff;
-            border-radius: 12px; /* Más redondeado */
-            padding: 15px;
-            box-shadow: 0 4px 12px var(--shadow-light); /* Sombra más pronunciada pero suave */
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; /* Para organizar el contenido internamente */
-            flex-direction: column;
+            background: #fff; border-radius: 12px; overflow: hidden;
+            border: 1px solid #eee; transition: 0.2s;
         }
-        .producto:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-        }
-        .producto img {
-            width: 100%;
-            height: 150px; /* Altura fija para imágenes */
-            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
-            border-radius: 8px;
-            margin-bottom: 12px;
-        }
-        .producto h3 {
-            font-size: 1.1em;
-            margin: 8px 0;
-            color: var(--text-dark);
-            flex-grow: 1; /* Permite que el título ocupe espacio y empuje el precio hacia abajo */
-        }
-        .precio {
-            font-weight: bold;
-            color: #28a745; /* Verde para precios */
-            font-size: 1.2em;
-            margin-bottom: 8px;
-        }
-        .stock {
-            font-size: 0.9em;
-            color: var(--text-gray);
-            margin-bottom: 15px;
-        }
+
+        .producto:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+
+        .producto img { width: 100%; height: 180px; object-fit: cover; background: #eee; }
+
+        .info-card { padding: 12px; }
+
+        .precio { font-size: 18px; font-weight: 700; }
+
+        .nombre-prod { font-size: 14px; color: #555; height: 36px; overflow: hidden; margin: 8px 0; }
+
         .agregar {
-            padding: 10px 15px;
-            background: var(--primary-color);
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.95em;
-            font-weight: 600;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-        .agregar:hover {
-            background: #0056b3;
-            transform: translateY(-2px);
+            width: 100%; padding: 8px; background: white;
+            color: var(--wallapop-green); border: 2px solid var(--wallapop-green);
+            border-radius: 8px; font-weight: bold; cursor: pointer;
         }
 
-        /* CARRITO FLOTANTE */
+        .agregar:hover { background: var(--wallapop-green); color: white; }
+
         #carrito {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 260px; /* Ancho ajustado para mejor aspecto */
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* Sombra más definida */
-            z-index: 999;
-            border: 1px solid var(--border-light);
-        }
-        #carrito h3 {
-            margin-top: 0;
-            font-size: 1.4em;
-            text-align: center;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-        }
-        #listaCarrito {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            max-height: 250px; /* Un poco más de altura */
-            overflow-y: auto;
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-            padding-top: 10px;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        #listaCarrito li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            color: var(--text-dark);
-            font-size: 0.95em;
-        }
-        #listaCarrito li:not(:last-child) {
-            border-bottom: 1px dashed #f0f0f0; /* Borde sutil */
-        }
-        #listaCarrito button {
-            background: #dc3545; /* Rojo para eliminar */
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            padding: 4px 8px;
-            font-size: 0.8em;
-            transition: background 0.3s ease;
-        }
-        #listaCarrito button:hover {
-            background: #c82333;
-        }
-        #total {
-            font-weight: bold;
-            margin-top: 15px;
-            text-align: right;
-            font-size: 1.3em;
-            color: var(--text-dark);
-        }
-        #comprar {
-            margin-top: 20px;
-            padding: 12px;
-            background: var(--secondary-color);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1em;
-            border-radius: 8px;
-            width: 100%;
-            font-weight: 600;
-            transition: background 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(255, 153, 0, 0.4);
-        }
-        #comprar:hover {
-            background: #cc7a00;
-            transform: translateY(-2px);
+            position: fixed; top: 80px; right: 10%;
+            width: 320px; background: white; border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); padding: 20px;
+            display: none; z-index: 2000;
         }
 
-        /* Media Queries para responsividad */
-        @media (max-width: 900px) {
-            body {
-                padding-right: 20px; /* Desactiva el padding si el carrito se mueve */
-                flex-direction: column; /* Apila el contenido y el carrito */
-                align-items: center;
-            }
-            .contenido-principal {
-                width: 100%; /* Ocupa todo el ancho */
-            }
-            #carrito {
-                position: static; /* Deja de ser fijo y fluye con el contenido */
-                width: 90%; /* Ocupa más ancho en móvil */
-                max-width: 400px; /* Un máximo para que no sea enorme en tablets */
-                margin-top: 30px; /* Margen superior cuando no es fijo */
-                right: auto;
-            }
-        }
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 1.8em;
-            }
-            #productos {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 15px;
-            }
-            .producto img {
-                height: 120px;
-            }
-            #buscar {
-                font-size: 0.95em;
-                padding: 10px 12px;
-            }
-            .boton-categoria {
-                padding: 8px 15px;
-                font-size: 0.9em;
-            }
+        #carrito.activo { display: block; }
+
+        #listaCarrito { list-style: none; padding: 0; max-height: 300px; overflow-y: auto; }
+
+        #listaCarrito li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+
+        .btn-eliminar { color: #ff4d4d; background: none; border: none; cursor: pointer; }
+
+        #comprar {
+            width: 100%; padding: 14px; background: var(--wallapop-green);
+            color: white; border: none; border-radius: 10px; font-weight: bold;
+            margin-top: 15px; cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <div class="contenido-principal">
-        <h1>Tienda de Golosinas</h1>
-
-        <input type="text" id="buscar" placeholder="Buscar producto...">
-
-        <div id="categorias">
-            <button class="boton-categoria activo" data-categoria="todos">Todos</button>
-            <button class="boton-categoria" data-categoria="golosinas">Golosinas</button>
-            <button class="boton-categoria" data-categoria="jugos">Jugos</button>
-            <button class="boton-categoria" data-categoria="alfajores">Alfajores</button>
-            <button class="boton-categoria" data-categoria="otros">Otros</button>
-        </div>
-
-        <div id="productos">
-            <!-- Ejemplo de productos -->
-            <div class="producto" data-categoria="golosinas">
-                <img src="imagenes/globo-bombuchas-x-100-un.jpg" alt="Globo Bombuchas">
-                <h3>Globo Bombuchas x100</h3>
-                <div class="precio">$2.000</div>
-                <div class="stock">Disponible</div>
-                <button class="agregar">Agregar al carrito</button>
-            </div>
-            <div class="producto" data-categoria="jugos">
-                <img src="imagenes/juguito-pepito-triple-sabor.jpg" alt="Juguito Pepito">
-                <h3>Juguito Pepito triple sabor</h3>
-                <div class="precio">$700</div>
-                <div class="stock">Disponible</div>
-                <button class="agregar">Agregar al carrito</button>
-            </div>
-            <div class="producto" data-categoria="alfajores">
-                <img src="imagenes/alfajor-fulbito-chocolate.jpg" alt="Alfajor Fulbito">
-                <h3>Alfajor Fulbito Chocolate</h3>
-                <div class="precio">$400</div>
-                <div class="stock">Disponible</div>
-                <button class="agregar">Agregar al carrito</button>
-            </div>
-            <!-- Puedes añadir más productos aquí -->
-            <div class="producto" data-categoria="golosinas">
-                <img src="https://via.placeholder.com/150/ff7f50/ffffff?text=Caramelos" alt="Caramelos">
-                <h3>Caramelos Surtidos</h3>
-                <div class="precio">$500</div>
-                <div class="stock">Disponible</div>
-                <button class="agregar">Agregar al carrito</button>
-            </div>
-             <div class="producto" data-categoria="alfajores">
-                <img src="https://via.placeholder.com/150/87cefa/ffffff?text=Alfajor+Maicena" alt="Alfajor Maicena">
-                <h3>Alfajor de Maicena</h3>
-                <div class="precio">$350</div>
-                <div class="stock">Disponible</div>
-                <button class="agregar">Agregar al carrito</button>
-            </div>
-             <div class="producto" data-categoria="jugos">
-                <img src="https://via.placeholder.com/150/98fb98/ffffff?text=Jugo+Naranja" alt="Jugo Naranja">
-                <h3>Jugo de Naranja Natural</h3>
-                <div class="precio">$950</div>
-                <div class="stock">Disponible</div>
-                <button class="agregar">Agregar al carrito</button>
-            </div>
-        </div>
+<header>
+    <a href="#" class="logo">GoloShop</a>
+    <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="buscar" placeholder="Buscar golosinas...">
     </div>
+    <button class="btn-carrito-nav" onclick="toggleCarrito()">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-badge" id="cart-count">0</span>
+    </button>
+</header>
 
-    <div id="carrito">
-        <h3>Tu Carrito</h3>
-        <ul id="listaCarrito"></ul>
-        <div id="total">Total: $0</div>
-        <button id="comprar">Comprar con Mercado Pago</button>
-    </div>
+<div id="categorias">
+    <button class="boton-categoria activo" data-categoria="todos">Todos</button>
+    <button class="boton-categoria" data-categoria="golosinas">Golosinas</button>
+    <button class="boton-categoria" data-categoria="alfajores">Alfajores</button>
+    <button class="boton-categoria" data-categoria="jugos">Jugos</button>
+    <button class="boton-categoria" data-categoria="otros">Otros</button>
+</div>
 
+<div id="productos">
     <script>
-        // FILTRO PRODUCTOS
-        const inputBuscar = document.getElementById('buscar');
-        const productos = document.querySelectorAll('.producto');
-        const botones = document.querySelectorAll('.boton-categoria');
+        const listaProductos = [
+            { n: "Globo Bombuchas x100", p: 2000, img: "globo-bombuchas-x-100-un.jpg", c: "otros" },
+            { n: "Globo Bombuchas x25", p: 500, img: "globo-bombuchas-sueltas-x-25-un.jpg", c: "otros" },
+            { n: "Girasol Tostalindo 50g", p: 800, img: "girasol-tostalindo-50g.jpg", c: "otros" },
+            { n: "Juguito Pepito Triple Sabor", p: 700, img: "juguito-pepito-triple-sabor.jpg", c: "jugos" },
+            { n: "Juguito Pepito Top 2 Sabores", p: 500, img: "juguito-pepito-top2-sabores.jpg", c: "jugos" },
+            { n: "Pastillas Lucky x8", p: 100, img: "pastillas-lucky-x-8-un.jpg", c: "golosinas" },
+            { n: "Tubitwist TNT Frutilla 15g", p: 500, img: "tubitwist-tnt-acida-frutilla-15g.jpg", c: "golosinas" },
+            { n: "Tubitwist TNT Uva 15g", p: 500, img: "tubitwist-tnt-acida-uva-15g.jpg", c: "golosinas" },
+            { n: "Tubitwist TNT Frutilla 70g", p: 1500, img: "tubitwist-tnt-acida-frutilla-70g.jpg", c: "golosinas" },
+            { n: "Tubitwist TNT Uva 70g", p: 1500, img: "tubitwist-tnt-acida-uva-70g.jpg", c: "golosinas" },
+            { n: "Regaliz Bull Dog Billiken 75g", p: 1500, img: "regaliz-bull-dog-billiken-75g.jpg", c: "golosinas" },
+            { n: "Malvavisco Gongys 28g", p: 700, img: "malvavisco-gongys-28g.jpg", c: "golosinas" },
+            { n: "Heladitos Secos Un.", p: 200, img: "heladitos-secos-un.jpg", c: "golosinas" },
+            { n: "Gallinitas Surtidas Un.", p: 200, img: "gallinitas-surtidas-un.jpg", c: "golosinas" },
+            { n: "Chup Pops Evolution", p: 500, img: "chup-pops-evolution-surtido.jpg", c: "golosinas" },
+            { n: "Chupetin Mr Pops Fruta", p: 300, img: "chupetin-mr-pops-fruta.jpg", c: "golosinas" },
+            { n: "Bizcochuelo Pic Nic", p: 1000, img: "bizcochuelo-pic-nic-un.jpg", c: "otros" },
+            { n: "Mini Torta Rapsodia", p: 1000, img: "mini-torta-rapsodia.jpg", c: "alfajores" },
+            { n: "Alfajor Fulbito Chocolate", p: 400, img: "alfajor-fulbito-chocolate.jpg", c: "alfajores" },
+            { n: "Alfajor Fulbito Mani", p: 400, img: "alfajor-fulbito-mani.jpg", c: "alfajores" },
+            { n: "Alfajor Guaymallen Oro", p: 1300, img: "alfajor-guaymallen-oro-50g.jpg", c: "alfajores" },
+            { n: "Alfajor Guaymallen Platino", p: 1300, img: "alfajor-guaymallen-platino-50g.jpg", c: "alfajores" },
+            { n: "Alfajor Fantoche Simple Night", p: 1200, img: "alfajor-fantoche-simple-night-50g.jpg", c: "alfajores" },
+            { n: "Alfajor Fantoche Simple Day", p: 1200, img: "alfajor-fantoche-simple-day-50g.jpg", c: "alfajores" },
+            { n: "Turron Fulbito Un.", p: 400, img: "turron-fulbito-un.jpg", c: "otros" },
+            { n: "Sapito Chocolatoso", p: 500, img: "rospo-sapito-chocolatoso-un.jpg", c: "golosinas" },
+            { n: "Sapito Frutilla", p: 500, img: "rospo-sapito-frutilla-un.jpg", c: "golosinas" },
+            { n: "Sapito Mani", p: 500, img: "rospo-sapito-mani-un.jpg", c: "golosinas" },
+            { n: "Sapito Dulce de Leche", p: 500, img: "rospo-sapito-dulce-de-leche-un.jpg", c: "golosinas" },
+            { n: "Chicle Fierita Tutti", p: 100, img: "chicle-fierita-tutti-un.jpg", c: "golosinas" },
+            { n: "Chicle Fierita Banana", p: 100, img: "chicle-fierita-banana-un.jpg", c: "golosinas" },
+            { n: "Chicle Fierita Rec Frutilla", p: 300, img: "chicle-fierita-rec-frutilla-un.jpg", c: "golosinas" },
+            { n: "Chicle Open Candy Sandia", p: 300, img: "chicle-open-candy-sandia-un.jpg", c: "golosinas" },
+            { n: "Masticable Misky Frutita", p: 33, img: "masticable-misky-frutita-un.jpg", c: "golosinas" },
+            { n: "Tira Acida Marengo x2", p: 100, img: "tira-acida-marengo-x-2-un.jpg", c: "golosinas" },
+            { n: "Goma Rollo Misky", p: 100, img: "goma-rollo-misky-un.jpg", c: "golosinas" },
+            { n: "Sugus Tradicional", p: 33, img: "sugus-tradicional-un.jpg", c: "golosinas" },
+            { n: "Masticable Billiken Surtido", p: 33, img: "masticable-billiken-surtido-un.jpg", c: "golosinas" },
+            { n: "Mielcita Suschen", p: 100, img: "mielcita-suschen-un.jpg", c: "golosinas" },
+            { n: "Chup Crazy Pop Uva", p: 900, img: "chup-crazy-pop-uva-un.jpg", c: "golosinas" },
+            { n: "Chup Crazy Pop Frutilla", p: 900, img: "chup-crazy-pop-frutilla-un.jpg", c: "golosinas" },
+            { n: "Sugus Confitado 50g", p: 1500, img: "sugus-confitado-tradicional-50g.jpg", c: "golosinas" },
+            { n: "Caramelo Lenguetazo Tutti", p: 400, img: "caramelo-lenguetazo-tutti-un.jpg", c: "golosinas" }
+        ];
 
-        function filtrarProductos() {
-            const texto = inputBuscar.value.toLowerCase();
-            const categoriaActiva = document.querySelector('.boton-categoria.activo')?.dataset.categoria || 'todos';
-            productos.forEach(producto => {
-                const nombre = producto.querySelector('h3').textContent.toLowerCase();
-                const categoria = producto.dataset.categoria;
-                producto.style.display = (nombre.includes(texto) && (categoriaActiva === 'todos' || categoria === categoriaActiva)) ? 'flex' : 'none'; // Cambiado a 'flex'
-            });
-        }
-
-        inputBuscar.addEventListener('input', filtrarProductos);
-        botones.forEach(boton => {
-            boton.addEventListener('click', () => {
-                botones.forEach(b => b.classList.remove('activo'));
-                boton.classList.add('activo');
-                filtrarProductos();
-            });
-        });
-
-        // CARRITO DINÁMICO
-        let carrito = [];
-        const listaCarrito = document.getElementById('listaCarrito');
-        const totalDiv = document.getElementById('total');
-
-        function actualizarCarrito() {
-            listaCarrito.innerHTML = '';
-            let total = 0;
-            carrito.forEach((item, index) => {
-                const li = document.createElement('li');
-                // Quitamos el $ al principio para no tenerlo duplicado en el display y el cálculo
-                const precioNumerico = Number(item.precio.replace(/\./g, '').replace('$', ''));
-                li.innerHTML = `
-                    <span>${item.nombre}</span>
-                    <span>$${precioNumerico.toLocaleString('es-AR')}</span>
-                    <button data-index="${index}">X</button>
-                `;
-                // El evento onClick se asigna al botón dentro del li
-                li.querySelector('button').onclick = (e) => {
-                    const idx = e.target.dataset.index;
-                    carrito.splice(idx, 1);
-                    actualizarCarrito();
-                };
-                listaCarrito.appendChild(li);
-
-                total += precioNumerico;
-            });
-            totalDiv.textContent = `Total: $${total.toLocaleString('es-AR')}`; // Formato de moneda
-        }
-
-        // AGREGAR PRODUCTOS
-        document.querySelectorAll('.agregar').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const productoElement = btn.closest('.producto');
-                const nombre = productoElement.querySelector('h3').textContent;
-                const precio = productoElement.querySelector('.precio').textContent; // Obtiene "$X.XXX"
-                carrito.push({ nombre, precio });
-                actualizarCarrito();
-            });
-        });
-
-        // BOTÓN COMPRAR CON MERCADO PAGO
-        document.getElementById('comprar').addEventListener('click', () => {
-            if (carrito.length === 0) {
-                alert('El carrito está vacío');
-                return;
-            }
-
-            // TOTAL
-            let total = 0;
-            carrito.forEach(item => { total += Number(item.precio.replace(/\./g, '').replace('$','')); });
-
-            // LINK MERCADO PAGO (reemplazar TU_LINK_MP)
-            const urlMP = 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_LINK_MP'; // Necesitas un pref_id real de Mercado Pago
-            alert('Integración con Mercado Pago: Aquí se abriría la pasarela de pago. Asegúrate de reemplazar "TU_LINK_MP" con el ID de preferencia real de Mercado Pago.');
-            // window.open(urlMP,'_blank');
+        const container = document.getElementById('productos');
+        listaProductos.forEach(p => {
+            container.innerHTML += `
+                <div class="producto" data-categoria="${p.c}">
+                    <img src="imagenes/${p.img}" alt="${p.n}" onerror="this.src='https://via.placeholder.com/200x180?text=Golosina'">
+                    <div class="info-card">
+                        <div class="precio">$${p.p.toLocaleString('es-AR')}</div>
+                        <div class="nombre-prod">${p.n}</div>
+                        <button class="agregar" onclick="agregarAlCarrito('${p.n}', ${p.p})">Añadir</button>
+                    </div>
+                </div>
+            `;
         });
     </script>
+</div>
+
+<div id="carrito">
+    <h3 style="margin-top:0">Mi Carrito</h3>
+    <ul id="listaCarrito"></ul>
+    <div id="total" style="font-weight: bold; margin-top:15px; text-align:right;">Total: $0</div>
+    <button id="comprar">Comprar con Mercado Pago</button>
+</div>
+
+<script>
+    function toggleCarrito() { document.getElementById('carrito').classList.toggle('activo'); }
+
+    // Búsqueda y Filtros
+    const inputBuscar = document.getElementById('buscar');
+    const botones = document.querySelectorAll('.boton-categoria');
+
+    function filtrar() {
+        const texto = inputBuscar.value.toLowerCase();
+        const catActiva = document.querySelector('.boton-categoria.activo').dataset.categoria;
+        document.querySelectorAll('.producto').forEach(p => {
+            const nombre = p.querySelector('.nombre-prod').textContent.toLowerCase();
+            const cat = p.dataset.categoria;
+            p.style.display = (nombre.includes(texto) && (catActiva === 'todos' || cat === catActiva)) ? 'block' : 'none';
+        });
+    }
+
+    inputBuscar.addEventListener('input', filtrar);
+    botones.forEach(b => b.addEventListener('click', () => {
+        botones.forEach(btn => btn.classList.remove('activo'));
+        b.classList.add('activo');
+        filtrar();
+    }));
+
+    // Carrito
+    let carrito = [];
+    function agregarAlCarrito(nombre, precio) {
+        carrito.push({nombre, precio});
+        actualizarCarrito();
+    }
+
+    function eliminarItem(index) {
+        carrito.splice(index, 1);
+        actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+        const lista = document.getElementById('listaCarrito');
+        lista.innerHTML = '';
+        let total = 0;
+        carrito.forEach((item, i) => {
+            lista.innerHTML += `<li>${item.nombre} - $${item.precio} <button class="btn-eliminar" onclick="eliminarItem(${i})"><i class="fa-solid fa-trash"></i></button></li>`;
+            total += item.precio;
+        });
+        document.getElementById('total').textContent = `Total: $${total.toLocaleString('es-AR')}`;
+        document.getElementById('cart-count').textContent = carrito.length;
+    }
+
+    document.getElementById('comprar').addEventListener('click', () => {
+        if(carrito.length === 0) return alert('Carrito vacío');
+        window.open('https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_LINK_MP', '_blank');
+    });
+</script>
 
 </body>
 </html>
