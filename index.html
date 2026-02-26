@@ -1,123 +1,285 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kiosco Online</title>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
-    body { background-color: #f8f8f8; color: #333; }
+<meta charset="UTF-8">
+<title>JUXO Kiosco</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    header {
-      background-color: #fff;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-      position: sticky;
-      top:0;
-      z-index:1000;
-    }
-    header .logo { font-size: 1.5em; font-weight: bold; color: #00b894; }
-    header input[type="text"] { padding: 8px 12px; width: 200px; border-radius: 20px; border: 1px solid #ccc; }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+}
 
-    .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
+/* HEADER */
+header {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: sticky;
+    top:0;
+    z-index:1000;
+}
 
-    .categories { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; }
-    .categories button { padding: 8px 15px; border: none; border-radius: 20px; background-color: #00b894; color: #fff; cursor: pointer; flex-shrink: 0; }
-    .categories button:hover { background-color: #019874; }
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #13c1ac;
+}
 
-    .products { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 20px; }
-    .product-card { background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
-    .product-card:hover { transform: translateY(-5px); }
-    .product-card img { width: 100%; height: 200px; object-fit: cover; }
-    .product-info { padding: 10px; }
-    .product-info h3 { font-size: 1.1em; margin-bottom: 5px; }
-    .product-info p { font-size: 0.9em; margin-bottom: 10px; color: #555; }
-    .product-info span { font-weight: bold; color: #00b894; }
-    .product-info button { padding: 6px 12px; border: none; border-radius: 5px; background-color: #ff7675; color: #fff; cursor: pointer; }
-    .product-info button:hover { background-color: #e65b5b; }
+.search-bar {
+    flex: 1;
+    margin: 0 30px;
+}
 
-    footer { text-align: center; padding: 20px; margin-top: 30px; color: #999; font-size: 0.9em; }
-  </style>
+.search-bar input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+/* CATEGORÍAS */
+.categorias {
+    display: flex;
+    gap: 10px;
+    padding: 15px 30px;
+    overflow-x: auto;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.categorias button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    background: #13c1ac;
+    color: white;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.categorias button:hover {
+    background: #0f9b8c;
+}
+
+/* GRID PRODUCTOS */
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 30px;
+}
+
+/* TARJETA */
+.producto {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    transition: 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.producto:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transform: translateY(-5px);
+}
+
+.producto img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.producto h3 {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #333;
+}
+
+.precio {
+    font-size: 16px;
+    font-weight: bold;
+    color: #13c1ac;
+    margin: 5px 0;
+}
+
+.stock {
+    color: #00a884;
+    font-size: 13px;
+}
+
+/* BOTÓN COMPRAR */
+.producto button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    background: #ff7675;
+    color: #fff;
+    cursor: pointer;
+}
+
+.producto button:hover {
+    background: #e65b5b;
+}
+
+/* CARRITO */
+#carrito {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 250px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+#carrito h3 {
+    margin-bottom: 10px;
+}
+
+#carrito ul {
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-left: 0;
+}
+
+#carrito ul li {
+    margin-bottom: 8px;
+}
+
+#carrito-total {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <div class="logo">Kiosco</div>
-  <input type="text" placeholder="Buscar productos...">
+    <div class="logo">JUXO</div>
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar productos..." id="buscador">
+    </div>
 </header>
 
-<div class="container">
-  <div class="categories">
-    <button>Golosinas</button>
-    <button>Snacks</button>
-    <button>Jugos</button>
-    <button>Alfajores</button>
-    <button>Otros</button>
-  </div>
-
-  <div class="products">
-    <!-- Ejemplo de productos reales -->
-    <div class="product-card">
-      <img src="globo-bombuchas-x-100-un.jpg" alt="Globo Bombuchas x100">
-      <div class="product-info">
-        <h3>Globo Bombuchas x100</h3>
-        <p>Bombuchas surtidas en bolsa.</p>
-        <span>$2.000</span>
-        <button>Comprar</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="globo-bombuchas-sueltas-x-25-un.jpg" alt="Globo Bombuchas sueltas x25">
-      <div class="product-info">
-        <h3>Globo Bombuchas x25</h3>
-        <p>Bombuchas sueltas.</p>
-        <span>$500</span>
-        <button>Comprar</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="girasol-tostalindo-50g.jpg" alt="Girasol Tostalindo 50g">
-      <div class="product-info">
-        <h3>Girasol Tostalindo 50g</h3>
-        <p>Snack de semillas tostadas.</p>
-        <span>$800</span>
-        <button>Comprar</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="juguito-pepito-triple-sabor.jpg" alt="Juguito Pepito triple sabor">
-      <div class="product-info">
-        <h3>Juguito Pepito triple sabor</h3>
-        <p>Bebida de frutas.</p>
-        <span>$700</span>
-        <button>Comprar</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="juguito-pepito-top2-sabores.jpg" alt="Juguito Pepito top 2 sabores">
-      <div class="product-info">
-        <h3>Juguito Pepito top 2 sabores</h3>
-        <p>Bebida de frutas.</p>
-        <span>$500</span>
-        <button>Comprar</button>
-      </div>
-    </div>
-
-    <!-- Puedo seguir agregando todos tus productos de la lista -->
-
-  </div>
+<div class="categorias">
+    <button data-categoria="todas">Todos</button>
+    <button data-categoria="golosinas">Golosinas</button>
+    <button data-categoria="alfajores">Alfajores</button>
+    <button data-categoria="jugos">Jugos</button>
 </div>
 
-<footer>
-  © 2026 Kiosco Online - Todos los derechos reservados
-</footer>
+<section class="productos" id="productos">
+
+<!-- Ejemplo de producto -->
+<div class="producto" data-categoria="alfajores">
+    <img src="imagenes/alfajor-fantoche-simple-day-50g.jpg" alt="Alfajor Fantoche Simple Day 50g">
+    <h3>Alfajor Fantoche Simple Day 50g</h3>
+    <div class="precio">$1.200</div>
+    <div class="stock">Disponible</div>
+    <button class="agregar">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-categoria="golosinas">
+    <img src="imagenes/globo-bombuchas-x-100-un.jpg" alt="Globo Bombuchas x100">
+    <h3>Globo Bombuchas x100</h3>
+    <div class="precio">$2.000</div>
+    <div class="stock">Disponible</div>
+    <button class="agregar">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-categoria="jugos">
+    <img src="imagenes/juguito-pepito-triple-sabor.jpg" alt="Juguito Pepito triple sabor">
+    <h3>Juguito Pepito triple sabor</h3>
+    <div class="precio">$700</div>
+    <div class="stock">Disponible</div>
+    <button class="agregar">Agregar al carrito</button>
+</div>
+
+<!-- Aquí se pueden agregar todos tus productos restantes -->
+
+</section>
+
+<!-- CARRITO -->
+<div id="carrito">
+    <h3>Carrito</h3>
+    <ul id="lista-carrito"></ul>
+    <span id="carrito-total">Total: $0</span>
+</div>
+
+<script>
+// Filtrado por categoría
+const botones = document.querySelectorAll('.categorias button');
+const productos = document.querySelectorAll('.producto');
+
+botones.forEach(boton => {
+    boton.addEventListener('click', () => {
+        const categoria = boton.dataset.categoria;
+        productos.forEach(prod => {
+            if(categoria === "todas" || prod.dataset.categoria === categoria){
+                prod.style.display = "flex";
+            } else {
+                prod.style.display = "none";
+            }
+        });
+    });
+});
+
+// Buscador
+document.getElementById('buscador').addEventListener('input', function() {
+    const texto = this.value.toLowerCase();
+    productos.forEach(prod => {
+        const nombre = prod.querySelector('h3').textContent.toLowerCase();
+        if(nombre.includes(texto)){
+            prod.style.display = "flex";
+        } else {
+            prod.style.display = "none";
+        }
+    });
+});
+
+// Carrito básico
+let carrito = [];
+const listaCarrito = document.getElementById('lista-carrito');
+const totalCarrito = document.getElementById('carrito-total');
+
+document.querySelectorAll('.agregar').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const producto = this.parentElement;
+        const nombre = producto.querySelector('h3').textContent;
+        const precio = parseInt(producto.querySelector('.precio').textContent.replace('$','').replace(/\./g,''));
+        carrito.push({nombre, precio});
+        actualizarCarrito();
+    });
+});
+
+function actualizarCarrito(){
+    listaCarrito.innerHTML = '';
+    let total = 0;
+    carrito.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.nombre} - $${item.precio}`;
+        listaCarrito.appendChild(li);
+        total += item.precio;
+    });
+    totalCarrito.textContent = `Total: $${total}`;
+}
+</script>
 
 </body>
 </html>
