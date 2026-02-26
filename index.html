@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda de Golosinas</title>
+<title>Tienda con Mercado Pago</title>
 <style>
 body { font-family: Arial; padding: 20px; background: #f9f9f9; }
 #buscar { width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px; }
@@ -17,8 +17,9 @@ body { font-family: Arial; padding: 20px; background: #f9f9f9; }
 .agregar:hover { background: #218838; }
 #carrito { margin-top: 20px; border: 1px solid #ccc; padding: 10px; background: #fff; }
 #carrito h3 { margin-top: 0; }
-#enviarWhatsapp { margin-top: 10px; padding: 10px; background: #25D366; color: #fff; border: none; cursor: pointer; font-size: 16px; }
-#enviarWhatsapp:hover { background: #1ebe57; }
+#total { font-weight: bold; margin-top: 10px; }
+#comprar { margin-top: 10px; padding: 10px; background: #ff9900; color: #fff; border: none; cursor: pointer; font-size: 16px; }
+#comprar:hover { background: #cc7a00; }
 </style>
 </head>
 <body>
@@ -44,7 +45,8 @@ body { font-family: Arial; padding: 20px; background: #f9f9f9; }
 <div id="carrito">
   <h3>Carrito:</h3>
   <ul id="listaCarrito"></ul>
-  <button id="enviarWhatsapp">Enviar por WhatsApp</button>
+  <div id="total">Total: $0</div>
+  <button id="comprar">Comprar con Mercado Pago</button>
 </div>
 
 <script>
@@ -72,16 +74,17 @@ botones.forEach(boton => {
   });
 });
 
-// CARRITO
+// CARRITO DINÁMICO
 let carrito = [];
 const listaCarrito = document.getElementById('listaCarrito');
+const totalDiv = document.getElementById('total');
 
 function actualizarCarrito() {
   listaCarrito.innerHTML = '';
+  let total = 0;
   carrito.forEach((item, index) => {
     const li = document.createElement('li');
     li.textContent = `${item.nombre} - ${item.precio}`;
-    // Opción para eliminar del carrito
     const eliminar = document.createElement('button');
     eliminar.textContent = 'X';
     eliminar.style.marginLeft = '10px';
@@ -89,7 +92,11 @@ function actualizarCarrito() {
     eliminar.onclick = () => { carrito.splice(index,1); actualizarCarrito(); };
     li.appendChild(eliminar);
     listaCarrito.appendChild(li);
+
+    // Sumar total
+    total += Number(item.precio.replace(/\./g,'').replace('$',''));
   });
+  totalDiv.textContent = `Total: $${total}`;
 }
 
 // AGREGAR PRODUCTOS
@@ -103,14 +110,18 @@ document.querySelectorAll('.agregar').forEach(btn => {
   });
 });
 
-// ENVIAR A WHATSAPP
-document.getElementById('enviarWhatsapp').addEventListener('click', () => {
+// BOTÓN COMPRAR CON MERCADO PAGO
+document.getElementById('comprar').addEventListener('click', () => {
   if(carrito.length === 0) { alert('El carrito está vacío'); return; }
-  let mensaje = '¡Hola! Quiero comprar estos productos:\n';
-  carrito.forEach(item => { mensaje += `- ${item.nombre} (${item.precio})\n`; });
-  const telefono = '54911XXXXXXX'; // tu número de WhatsApp
-  const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-  window.open(url, '_blank');
+
+  // Calcular total
+  let total = 0;
+  carrito.forEach(item => { total += Number(item.precio.replace(/\./g,'').replace('$','')); });
+
+  // LINK DE MERCADO PAGO: reemplaza TU_LINK_MP con tu link de preferencia o usar API para monto dinámico
+  const urlMP = 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_LINK_MP';
+
+  window.open(urlMP, '_blank');
 });
 </script>
 
