@@ -18,10 +18,9 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-gray);
             margin: 0;
-            padding-top: 80px;
+            padding-top: 90px;
         }
 
-        /* HEADER */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -40,7 +39,6 @@
             font-size: 22px;
             font-weight: 800;
             text-decoration: none;
-            white-space: nowrap;
         }
 
         .search-wrapper {
@@ -65,7 +63,13 @@
             border: 1px solid var(--border);
             background: #f2f4f5;
             outline: none;
-            box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+            box-sizing: border-box;
+        }
+
+        /* Sección de ejemplo para que no se vea vacío */
+        .container {
+            padding: 20px 5%;
+            text-align: center;
         }
     </style>
 </head>
@@ -77,5 +81,10 @@
             <input type="text" placeholder="Busca productos en Jupiter...">
         </div>
     </header>
+
+    <main class="container">
+        <h1>¡Bienvenido a Kiosco Jupiter!</h1>
+        <p>La web está funcionando correctamente.</p>
+    </main>
 </body>
 </html>
