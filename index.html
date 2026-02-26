@@ -50,8 +50,32 @@
             position: relative;
         }
 
+        .search-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #99a3ad;
+        }
+
         .search-wrapper input {
             width: 100%;
             padding: 10px 15px 10px 40px;
             border-radius: 25px;
-            border: 1
+            border: 1px solid var(--border);
+            background: #f2f4f5;
+            outline: none;
+            box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo-text">KIOSCO JUPITER</a>
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Busca productos en Jupiter...">
+        </div>
+    </header>
+</body>
+</html>
