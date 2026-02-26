@@ -22,7 +22,6 @@
             color: var(--text-main);
         }
 
-        /* BARRA SUPERIOR */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -81,7 +80,6 @@
             font-weight: bold;
         }
 
-        /* CATEGORIAS */
         .nav-cats {
             display: flex;
             gap: 10px;
@@ -110,7 +108,6 @@
             border-color: var(--wallapop-cyan);
         }
 
-        /* GRID DE PRODUCTOS */
         .container {
             max-width: 1100px;
             margin: 20px auto;
@@ -162,7 +159,6 @@
 
         .add-btn:hover { background: var(--wallapop-cyan); color: white; }
 
-        /* CARRITO SIDEBAR */
         .cart-sidebar {
             position: fixed; top: 0; right: -350px;
             width: 320px; height: 100%;
@@ -218,8 +214,7 @@
 </div>
 
 <div class="container">
-    <div class="grid" id="productGrid">
-        </div>
+    <div class="grid" id="productGrid"></div>
 </div>
 
 <div class="cart-sidebar" id="sidebar">
@@ -235,7 +230,6 @@
 </div>
 
 <script>
-    // BASE DE DATOS DE PRODUCTOS
     const data = [
         { n: "Globo Bombuchas x100", p: 2000, i: "globo-bombuchas-x-100-un.jpg", c: "otros" },
         { n: "Globo Bombuchas sueltas x25", p: 500, i: "globo-bombuchas-sueltas-x-25-un.jpg", c: "otros" },
@@ -285,7 +279,6 @@
     let cart = [];
     const grid = document.getElementById('productGrid');
 
-    // MOSTRAR PRODUCTOS
     function render(filter = 'todos', search = '') {
         grid.innerHTML = '';
         const filtered = data.filter(p => {
@@ -307,7 +300,6 @@
         });
     }
 
-    // LÓGICA DEL CARRITO
     function toggleCart() { document.getElementById('sidebar').classList.toggle('open'); }
 
     function addToCart(name, price) {
@@ -319,29 +311,35 @@
         const list = document.getElementById('cart-list');
         const count = document.getElementById('cart-count');
         const total = document.getElementById('cart-total');
-        
         list.innerHTML = '';
         let sum = 0;
-        cart.forEach((item, index) => {
+        cart.forEach((item) => {
             sum += item.price;
             list.innerHTML += `<li>${item.name} <span>$${item.price}</span></li>`;
         });
-        
         count.innerText = cart.length;
         total.innerText = `Total: $${sum}`;
     }
 
-    // WHATSAPP
     function sendToWA() {
         if(cart.length === 0) return alert('El carrito está vacío');
+        
+        // --- CONFIGURACIÓN DE TUS DATOS ---
+        const miNumero = "02345"; 
+        const miAlias = "jupiter.d";
+        // ----------------------------------
+
         let msg = "Hola! Mi pedido en Kiosco Jupiter es:%0A%0A";
         cart.forEach(i => msg += `- ${i.name} ($${i.price})%0A`);
         let total = cart.reduce((a, b) => a + b.price, 0);
+        
         msg += "%0A*Total: $" + total + "*";
-        window.open(`https://wa.me/5491100000000?text=${msg}`); // Reemplaza el número aquí
+        msg += "%0A%0A*Datos de Pago:*";
+        msg += "%0A- Alias Mercado Pago: *" + miAlias + "*";
+        
+        window.open(`https://wa.me/${miNumero}?text=${msg}`);
     }
 
-    // FILTROS
     function filterData(cat, el) {
         document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
         el.classList.add('active');
@@ -353,7 +351,6 @@
         render(cat === 'todos' ? 'todos' : cat, e.target.value);
     };
 
-    // INICIO
     render();
 </script>
 
