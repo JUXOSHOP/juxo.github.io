@@ -333,11 +333,11 @@
         cart.forEach(i => msg += `- ${i.name} ($${i.price})%0A`);
         let total = cart.reduce((a, b) => a + b.price, 0);
         
-       msg += "%0A*Total a pagar: $" + total + "*";
-        msg += "%0A%0A*¿Cómo pago?*"; // Agregamos una pregunta clara
-        msg += "%0APodés transferir el total al siguiente Alias de Mercado Pago:";
-        msg += "%0A👉 Alias: *" + miAlias + "*";
-        msg += "%0A%0A(Luego envíame el comprobante por acá)"; // Instrucción final
+        msg += "%0A*Total a pagar: $" + total + "*";
+        msg += "%0A%0A*¿Cómo confirmo?*";
+        msg += "%0A1️⃣ Transferí al Alias: *" + miAlias + "*";
+        msg += "%0A2️⃣ Enviame el comprobante por acá.";
+        msg += "%0A%0A⚠️ *¡Te reservo el pedido para que no se agote y lo pasás a retirar cuando quieras!* 🏃‍♂️💨";
         
         window.open(`https://wa.me/${miNumero}?text=${msg}`);
     }
