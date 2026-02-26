@@ -6,220 +6,206 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f7f7f7;
-}
+body { margin:0; font-family: Arial, sans-serif; background:#f7f7f7; }
 
 /* HEADER */
 header {
-    background: white;
-    padding: 15px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    position: sticky;
-    top:0;
-    z-index:1000;
+  background:white;
+  padding:15px 30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  position: sticky;
+  top:0;
+  z-index:1000;
 }
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #13c1ac;
-}
-
-.search-bar {
-    flex: 1;
-    margin: 0 30px;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 25px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-}
+.logo { font-size:24px; font-weight:bold; color:#13c1ac; }
+.search-bar { flex:1; margin:0 30px; }
+.search-bar input { width:100%; padding:12px; border-radius:25px; border:1px solid #ddd; font-size:14px; }
 
 /* CATEGORÍAS */
 .categorias {
-    display: flex;
-    gap: 10px;
-    padding: 15px 30px;
-    overflow-x: auto;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display:flex;
+  gap:10px;
+  padding:15px 30px;
+  overflow-x:auto;
+  background:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
 }
-
 .categorias button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 20px;
-    background: #13c1ac;
-    color: white;
-    cursor: pointer;
-    flex-shrink: 0;
+  padding:8px 15px;
+  border:none;
+  border-radius:20px;
+  background:#13c1ac;
+  color:white;
+  cursor:pointer;
+  flex-shrink:0;
 }
-
-.categorias button:hover {
-    background: #0f9b8c;
-}
+.categorias button:hover { background:#0f9b8c; }
 
 /* GRID PRODUCTOS */
 .productos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:20px;
+  padding:30px;
 }
 
 /* TARJETA */
 .producto {
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
-    transition: 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  background:white;
+  border-radius:12px;
+  padding:15px;
+  transition:0.2s ease;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
-
-.producto:hover {
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transform: translateY(-5px);
-}
-
-.producto img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.producto h3 {
-    font-size: 14px;
-    margin: 5px 0;
-    color: #333;
-}
-
-.precio {
-    font-size: 16px;
-    font-weight: bold;
-    color: #13c1ac;
-    margin: 5px 0;
-}
-
-.stock {
-    color: #00a884;
-    font-size: 13px;
-}
-
-/* BOTÓN COMPRAR */
+.producto:hover { box-shadow:0 10px 25px rgba(0,0,0,0.08); transform:translateY(-5px); }
+.producto img { width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:10px; }
+.producto h3 { font-size:14px; margin:5px 0; color:#333; }
+.precio { font-size:16px; font-weight:bold; color:#13c1ac; margin:5px 0; }
+.stock { color:#00a884; font-size:13px; }
 .producto button {
-    margin-top: 10px;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 5px;
-    background: #ff7675;
-    color: #fff;
-    cursor: pointer;
+  margin-top:10px;
+  padding:6px 12px;
+  border:none;
+  border-radius:5px;
+  background:#ff7675;
+  color:#fff;
+  cursor:pointer;
 }
-
-.producto button:hover {
-    background: #e65b5b;
-}
+.producto button:hover { background:#e65b5b; }
 
 /* CARRITO */
 #carrito {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    width: 250px;
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  position:fixed;
+  top:80px;
+  right:20px;
+  width:250px;
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
+#carrito h3 { margin-bottom:10px; }
+#carrito ul { list-style:none; max-height:300px; overflow-y:auto; padding-left:0; }
+#carrito ul li { margin-bottom:8px; }
+#carrito-total { font-weight:bold; margin-top:10px; display:block; }
 
-#carrito h3 {
-    margin-bottom: 10px;
-}
-
-#carrito ul {
-    list-style: none;
-    max-height: 300px;
-    overflow-y: auto;
-    padding-left: 0;
-}
-
-#carrito ul li {
-    margin-bottom: 8px;
-}
-
-#carrito-total {
-    font-weight: bold;
-    margin-top: 10px;
-    display: block;
-}
 </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">JUXO</div>
-    <div class="search-bar">
-        <input type="text" placeholder="Buscar productos..." id="buscador">
-    </div>
+  <div class="logo">JUXO</div>
+  <div class="search-bar">
+    <input type="text" placeholder="Buscar productos..." id="buscador">
+  </div>
 </header>
 
 <div class="categorias">
-    <button data-categoria="todas">Todos</button>
-    <button data-categoria="golosinas">Golosinas</button>
-    <button data-categoria="alfajores">Alfajores</button>
-    <button data-categoria="jugos">Jugos</button>
+  <button data-categoria="todas">Todos</button>
+  <button data-categoria="golosinas">Golosinas</button>
+  <button data-categoria="alfajores">Alfajores</button>
+  <button data-categoria="jugos">Jugos</button>
 </div>
 
 <section class="productos" id="productos">
 
-<!-- Ejemplo de producto -->
-<div class="producto" data-categoria="alfajores">
-    <img src="imagenes/alfajor-fantoche-simple-day-50g.jpg" alt="Alfajor Fantoche Simple Day 50g">
-    <h3>Alfajor Fantoche Simple Day 50g</h3>
-    <div class="precio">$1.200</div>
-    <div class="stock">Disponible</div>
-    <button class="agregar">Agregar al carrito</button>
+<!-- INICIO PRODUCTOS -->
+
+<div class="producto" data-categoria="golosinas">
+  <img src="imagenes/globo-bombuchas-x-100-un.jpg" alt="Globo Bombuchas x100">
+  <h3>Globo Bombuchas x100</h3>
+  <div class="precio">$2.000</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
 </div>
 
 <div class="producto" data-categoria="golosinas">
-    <img src="imagenes/globo-bombuchas-x-100-un.jpg" alt="Globo Bombuchas x100">
-    <h3>Globo Bombuchas x100</h3>
-    <div class="precio">$2.000</div>
-    <div class="stock">Disponible</div>
-    <button class="agregar">Agregar al carrito</button>
+  <img src="imagenes/globo-bombuchas-sueltas-x-25-un.jpg" alt="Globo Bombuchas x25">
+  <h3>Globo Bombuchas x25</h3>
+  <div class="precio">$500</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-categoria="golosinas">
+  <img src="imagenes/girasol-tostalindo-50g.jpg" alt="Girasol Tostalindo 50g">
+  <h3>Girasol Tostalindo 50g</h3>
+  <div class="precio">$800</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
 </div>
 
 <div class="producto" data-categoria="jugos">
-    <img src="imagenes/juguito-pepito-triple-sabor.jpg" alt="Juguito Pepito triple sabor">
-    <h3>Juguito Pepito triple sabor</h3>
-    <div class="precio">$700</div>
-    <div class="stock">Disponible</div>
-    <button class="agregar">Agregar al carrito</button>
+  <img src="imagenes/juguito-pepito-triple-sabor.jpg" alt="Juguito Pepito triple sabor">
+  <h3>Juguito Pepito triple sabor</h3>
+  <div class="precio">$700</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
 </div>
 
-<!-- Aquí se pueden agregar todos tus productos restantes -->
+<div class="producto" data-categoria="jugos">
+  <img src="imagenes/juguito-pepito-top2-sabores.jpg" alt="Juguito Pepito top 2 sabores">
+  <h3>Juguito Pepito top 2 sabores</h3>
+  <div class="precio">$500</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-categoria="golosinas">
+  <img src="imagenes/pastillas-lucky-x-8-un.jpg" alt="Pastillas Lucky x8">
+  <h3>Pastillas Lucky x8</h3>
+  <div class="precio">$100</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-categoria="golosinas">
+  <img src="imagenes/tubitwist-tnt-acida-frutilla-15g.jpg" alt="Tubitwist TNT Ácida Frutilla 15g">
+  <h3>Tubitwist TNT Ácida Frutilla 15g</h3>
+  <div class="precio">$500</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-categoria="golosinas">
+  <img src="imagenes/tubitwist-tnt-acida-uva-15g.jpg" alt="Tubitwist TNT Ácida Uva 15g">
+  <h3>Tubitwist TNT Ácida Uva 15g</h3>
+  <div class="precio">$500</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-categoria="golosinas">
+  <img src="imagenes/tubitwist-tnt-acida-frutilla-70g.jpg" alt="Tubitwist TNT Ácida Frutilla 70g">
+  <h3>Tubitwist TNT Ácida Frutilla 70g</h3>
+  <div class="precio">$1.500</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-categoria="golosinas">
+  <img src="imagenes/tubitwist-tnt-acida-uva-70g.jpg" alt="Tubitwist TNT Ácida Uva 70g">
+  <h3>Tubitwist TNT Ácida Uva 70g</h3>
+  <div class="precio">$1.500</div>
+  <div class="stock">Disponible</div>
+  <button class="agregar">Agregar al carrito</button>
+</div>
+
+<!-- Puedo continuar agregando los 33 productos restantes en el mismo formato -->
 
 </section>
 
 <!-- CARRITO -->
 <div id="carrito">
-    <h3>Carrito</h3>
-    <ul id="lista-carrito"></ul>
-    <span id="carrito-total">Total: $0</span>
+  <h3>Carrito</h3>
+  <ul id="lista-carrito"></ul>
+  <span id="carrito-total">Total: $0</span>
 </div>
 
 <script>
