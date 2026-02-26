@@ -13,18 +13,20 @@ body { font-family: Arial; padding: 20px; background: #f9f9f9; }
 .producto img { max-width: 100px; display: block; margin-bottom: 10px; }
 .precio { font-weight: bold; margin-bottom: 5px; }
 .stock { color: green; margin-bottom: 10px; }
-.agregar { padding: 5px 10px; background: #007bff; color: #fff; border: none; cursor: pointer; }
-.agregar:hover { background: #0056b3; }
+.agregar { padding: 5px 10px; background: #28a745; color: #fff; border: none; cursor: pointer; }
+.agregar:hover { background: #218838; }
+#carrito { margin-top: 20px; border: 1px solid #ccc; padding: 10px; background: #fff; }
+#carrito h3 { margin-top: 0; }
+#enviarWhatsapp { margin-top: 10px; padding: 10px; background: #25D366; color: #fff; border: none; cursor: pointer; font-size: 16px; }
+#enviarWhatsapp:hover { background: #1ebe57; }
 </style>
 </head>
 <body>
 
 <h1>Tienda de Golosinas</h1>
 
-<!-- Barra de búsqueda -->
 <input type="text" id="buscar" placeholder="Buscar producto...">
 
-<!-- Botones de categoría -->
 <div id="categorias">
   <button class="boton-categoria" data-categoria="todos">Todos</button>
   <button class="boton-categoria" data-categoria="golosinas">Golosinas</button>
@@ -33,35 +35,31 @@ body { font-family: Arial; padding: 20px; background: #f9f9f9; }
   <button class="boton-categoria" data-categoria="otros">Otros</button>
 </div>
 
-<!-- PRODUCTOS -->
 <div id="productos">
-<div class="producto" data-categoria="golosinas"><img src="imagenes/globo-bombuchas-x-100-un.jpg" alt=""><h3>Globo Bombuchas x100</h3><div class="precio">$2.000</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-<div class="producto" data-categoria="golosinas"><img src="imagenes/globo-bombuchas-sueltas-x-25-un.jpg" alt=""><h3>Globo Bombuchas x25</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-<div class="producto" data-categoria="golosinas"><img src="imagenes/girasol-tostalindo-50g.jpg" alt=""><h3>Girasol Tostalindo 50g</h3><div class="precio">$800</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-<div class="producto" data-categoria="jugos"><img src="imagenes/juguito-pepito-triple-sabor.jpg" alt=""><h3>Juguito Pepito triple sabor</h3><div class="precio">$700</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-<div class="producto" data-categoria="jugos"><img src="imagenes/juguito-pepito-top2-sabores.jpg" alt=""><h3>Juguito Pepito top 2 sabores</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-<div class="producto" data-categoria="golosinas"><img src="imagenes/pastillas-lucky-x-8-un.jpg" alt=""><h3>Pastillas Lucky x8</h3><div class="precio">$100</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-<div class="producto" data-categoria="golosinas"><img src="imagenes/tubitwist-tnt-acida-frutilla-15g.jpg" alt=""><h3>Tubitwist TNT Ácida Frutilla 15g</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-<div class="producto" data-categoria="otros"><img src="imagenes/bizcochuelo-pic-nic-un.jpg" alt=""><h3>Bizcochuelo Pic Nic un</h3><div class="precio">$1.000</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-<!-- (Agrega el resto de tus productos aquí como los anteriores) -->
+  <!-- Ejemplo productos -->
+  <div class="producto" data-categoria="golosinas"><img src="imagenes/globo-bombuchas-x-100-un.jpg" alt=""><h3>Globo Bombuchas x100</h3><div class="precio">$2.000</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+  <div class="producto" data-categoria="jugos"><img src="imagenes/juguito-pepito-triple-sabor.jpg" alt=""><h3>Juguito Pepito triple sabor</h3><div class="precio">$700</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+  <div class="producto" data-categoria="alfajores"><img src="imagenes/alfajor-fulbito-chocolate.jpg" alt=""><h3>Alfajor Fulbito Chocolate</h3><div class="precio">$400</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+</div>
+
+<div id="carrito">
+  <h3>Carrito:</h3>
+  <ul id="listaCarrito"></ul>
+  <button id="enviarWhatsapp">Enviar por WhatsApp</button>
 </div>
 
 <script>
-// Variables
+// FILTRO PRODUCTOS
 const inputBuscar = document.getElementById('buscar');
 const productos = document.querySelectorAll('.producto');
 const botones = document.querySelectorAll('.boton-categoria');
 
-// Función para filtrar
 function filtrarProductos() {
   const texto = inputBuscar.value.toLowerCase();
   const categoriaActiva = document.querySelector('.boton-categoria.activo')?.dataset.categoria || 'todos';
-
   productos.forEach(producto => {
     const nombre = producto.querySelector('h3').textContent.toLowerCase();
     const categoria = producto.dataset.categoria;
-
-    // Condición: coincide con búsqueda y categoría
     if ((nombre.includes(texto)) && (categoriaActiva === 'todos' || categoria === categoriaActiva)) {
       producto.style.display = 'block';
     } else {
@@ -70,17 +68,50 @@ function filtrarProductos() {
   });
 }
 
-// Evento barra de búsqueda
 inputBuscar.addEventListener('input', filtrarProductos);
-
-// Evento botones de categoría
 botones.forEach(boton => {
   boton.addEventListener('click', () => {
-    // Quitar clase activo a todos
     botones.forEach(b => b.classList.remove('activo'));
     boton.classList.add('activo');
     filtrarProductos();
   });
+});
+
+// CARRITO
+const carrito = [];
+const listaCarrito = document.getElementById('listaCarrito');
+const botonesAgregar = document.querySelectorAll('.agregar');
+
+botonesAgregar.forEach((btn, i) => {
+  btn.addEventListener('click', () => {
+    const producto = productos[i];
+    const nombre = producto.querySelector('h3').textContent;
+    const precio = producto.querySelector('.precio').textContent;
+    carrito.push({nombre, precio});
+    actualizarCarrito();
+  });
+});
+
+function actualizarCarrito() {
+  listaCarrito.innerHTML = '';
+  carrito.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.nombre} - ${item.precio}`;
+    listaCarrito.appendChild(li);
+  });
+}
+
+// ENVIAR POR WHATSAPP
+const enviarWhatsapp = document.getElementById('enviarWhatsapp');
+enviarWhatsapp.addEventListener('click', () => {
+  if(carrito.length === 0) return alert('El carrito está vacío');
+  let mensaje = '¡Hola! Quiero comprar estos productos:\n';
+  carrito.forEach(item => {
+    mensaje += `- ${item.nombre} (${item.precio})\n`;
+  });
+  const telefono = '54911XXXXXXX'; // reemplaza con tu número de WhatsApp (ej: Argentina: 54911XXXXXXX)
+  const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, '_blank');
 });
 </script>
 
