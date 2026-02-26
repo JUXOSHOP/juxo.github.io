@@ -3,88 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KIOSCO JUPITER | Estilo Wallapop</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>GoloShop | Estilo Wallapop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --wallapop-cyan: #13c1ac;
-            --wallapop-dark: #253238;
+            --wallapop-green: #13c1ac;
+            --text-dark: #253238;
             --bg-gray: #f7f9fa;
-            --border: #e0e6e9;
+            --border-color: #e0e6e9;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-gray);
-            margin: 0;
-            padding-top: 90px;
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: var(--bg-gray); 
+            margin: 0; 
+            padding-top: 85px; /* Espacio para el header fijo */
+            color: var(--text-dark);
         }
 
+        /* HEADER SUPERIOR (Buscador + Carrito) */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
-            height: 70px;
+            height: 75px;
             background: #fff;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 5%;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            padding: 0 10%;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
             z-index: 1000;
         }
 
-        .logo-text {
-            color: var(--wallapop-cyan);
-            font-size: 22px;
+        .logo {
+            font-size: 24px;
             font-weight: 800;
+            color: var(--wallapop-green);
             text-decoration: none;
+            flex-shrink: 0;
         }
 
-        .search-wrapper {
+        .search-bar {
             flex-grow: 1;
-            margin: 0 20px;
-            max-width: 500px;
+            margin: 0 30px;
             position: relative;
         }
 
-        .search-wrapper i {
+        #buscar {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            background: #f2f4f5;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        #buscar:focus {
+            background: #fff;
+            border-color: var(--wallapop-green);
+            box-shadow: 0 0 8px rgba(19, 193, 172, 0.2);
+        }
+
+        .search-icon {
             position: absolute;
-            left: 15px;
+            left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #99a3ad;
+            color: #888;
         }
 
-        .search-wrapper input {
+        /* ICONO CARRITO */
+        .btn-carrito-nav {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--wallapop-green);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 12px;
+        }
+
+        /* CATEGORÍAS (Estilo Chips) */
+        #categorias {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 0;
+            overflow-x: auto;
+        }
+
+        .boton-categoria {
+            padding: 10px 18px;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .boton-categoria:hover, .boton-categoria.activo {
+            background: var(--wallapop-green);
+            color: white;
+            border-color: var(--wallapop-green);
+        }
+
+        /* GRID DE PRODUCTOS */
+        #productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 0 10% 50px;
+        }
+
+        .producto {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .producto:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .producto img {
             width: 100%;
-            padding: 10px 15px 10px 40px;
-            border-radius: 25px;
-            border: 1px solid var(--border);
-            background: #f2f4f5;
-            outline: none;
-            box-sizing: border-box;
+            height: 200px;
+            object-fit: cover;
         }
 
-        /* Sección de ejemplo para que no se vea vacío */
-        .container {
-            padding: 20px 5%;
-            text-align: center;
+        .info-card {
+            padding: 12px;
+        }
+
+        .precio {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .nombre-prod {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 40px;
+        }
+
+        .agregar {
+            width: 100%;
+            padding: 10px;
+            background: white;
+            color: var(--wallapop-green);
+            border: 2px solid var(--wallapop-green);
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .agregar:hover {
+            background: var(--wallapop-green);
+            color: white;
+        }
+
+        /* CARRITO DESPLEGABLE */
+        #carrito {
+            position: fixed;
+            top: 80px;
+            right: 10%;
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            padding: 20px;
+            display: none; /* Se activa con JS */
+            z-index: 2000;
+        }
+
+        #carrito.activo { display: block; }
+
+        #listaCarrito { list-style: none; padding: 0; max-height: 250px; overflow-y: auto; }
+
+        #listaCarrito li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .btn-eliminar {
+            color: #ff4d4d;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        #comprar {
+            width: 100%;
+            padding: 14px;
+            background: var(--wallapop-green);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 600px) {
+            header { padding: 0 5%; }
+            .logo { font-size: 20px; }
+            #productos { grid-template-columns: repeat(2, 1fr); padding: 0 10px; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <a href="#" class="logo-text">KIOSCO JUPITER</a>
-        <div class="search-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Busca productos en Jupiter...">
-        </div>
-    </header>
 
-    <main class="container">
-        <h1>¡Bienvenido a Kiosco Jupiter!</h1>
-        <p>La web está funcionando correctamente.</p>
-    </main>
+<header>
+    <a href="#" class="logo">GoloShop</a>
+    
+    <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="buscar" placeholder="Buscar en todas las categorías">
+    </div>
+
+    <button class="btn-carrito-nav" onclick="toggleCarrito()">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-badge" id="cart-count">0</span>
+    </button>
+</header>
+
+<div id="categorias">
+    <button class="boton-categoria activo" data-categoria="todos">Todos</button>
+    <button class="boton-categoria" data-categoria="golosinas">Golosinas</button>
+    <button class="boton-categoria" data-categoria="jugos">Jugos</button>
+    <button class="boton-categoria" data-categoria="alfajores">Alfajores</button>
+</div>
+
+<div id="productos">
+    <div class="producto" data-categoria="golosinas">
+        <img src="https://via.placeholder.com/250x200" alt="Producto">
+        <div class="info-card">
+            <div class="precio">$2.000</div>
+            <div class="nombre-prod">Globo Bombuchas x100 unidades colores variados</div>
+            <button class="agregar">Añadir al carrito</button>
+        </div>
+    </div>
+    <div class="producto" data-categoria="jugos">
+        <img src="https://via.placeholder.com/250x200" alt="Producto">
+        <div class="info-card">
+            <div class="precio">$700</div>
+            <div class="nombre-prod">Juguito Pepito triple sabor 250ml</div>
+            <button class="agregar">Añadir al carrito</button>
+        </div>
+    </div>
+    <div class="producto" data-categoria="alfajores">
+        <img src="https://via.placeholder.com/250x200" alt="Producto">
+        <div class="info-card">
+            <div class="precio">$400</div>
+            <div class="nombre-prod">Alfajor Fulbito Chocolate clásico de siempre</div>
+            <button class="agregar">Añadir al carrito</button>
+        </div>
+    </div>
+</div>
+
+<div id="carrito">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 style="margin: 0;">Mi Compra</h3>
+        <button onclick="toggleCarrito()" style="border:none; background:none; cursor:pointer; font-size: 18px;">&times;</button>
+    </div>
+    <ul id="listaCarrito"></ul>
+    <div id="total" style="font-weight: 800; font-size: 18px; margin-top: 15px; text-align: right;">Total: $0</div>
+    <button id="comprar">Pagar pedido</button>
+</div>
+
+<script>
+    // Mostrar/Ocultar carrito
+    function toggleCarrito() {
+        document.getElementById('carrito').classList.toggle('activo');
+    }
+
+    // Filtros
+    const inputBuscar = document.getElementById('buscar');
+    const productos = document.querySelectorAll('.producto');
+    const botones = document.querySelectorAll('.boton-categoria');
+
+    function filtrarProductos() {
+        const texto = inputBuscar.value.toLowerCase();
+        const categoriaActiva = document.querySelector('.boton-categoria.activo')?.dataset.categoria || 'todos';
+        
+        productos.forEach(producto => {
+            const nombre = producto.querySelector('.nombre-prod').textContent.toLowerCase();
+            const categoria = producto.dataset.categoria;
+            const coincide = nombre.includes(texto) && (categoriaActiva === 'todos' || categoria === categoriaActiva);
+            producto.style.display = coincide ? 'block' : 'none';
+        });
+    }
+
+    inputBuscar.addEventListener('input', filtrarProductos);
+    botones.forEach(boton => {
+        boton.addEventListener('click', () => {
+            botones.forEach(b => b.classList.remove('activo'));
+            boton.classList.add('activo');
+            filtrarProductos();
+        });
+    });
+
+    // Lógica del Carrito
+    let carrito = [];
+    const listaCarrito = document.getElementById('listaCarrito');
+    const totalDiv = document.getElementById('total');
+    const cartCount = document.getElementById('cart-count');
+
+    function actualizarCarrito() {
+        listaCarrito.innerHTML = '';
+        let total = 0;
+        
+        carrito.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span>${item.nombre}</span>
+                <span>${item.precio} <button class="btn-eliminar" onclick="eliminarItem(${index})"><i class="fa-solid fa-trash-can"></i></button></span>
+            `;
+            listaCarrito.appendChild(li);
+            total += Number(item.precio.replace(/\./g,'').replace('$',''));
+        });
+
+        totalDiv.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+        cartCount.textContent = carrito.length;
+    }
+
+    window.eliminarItem = (index) => {
+        carrito.splice(index, 1);
+        actualizarCarrito();
+    }
+
+    document.querySelectorAll('.agregar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const producto = btn.closest('.producto');
+            const nombre = producto.querySelector('.nombre-prod').textContent;
+            const precio = producto.querySelector('.precio').textContent;
+            carrito.push({nombre, precio});
+            actualizarCarrito();
+            
+            // Efecto visual rápido
+            btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+            setTimeout(() => btn.textContent = "Añadir al carrito", 1000);
+        });
+    });
+
+    document.getElementById('comprar').addEventListener('click', () => {
+        if(carrito.length === 0) return alert('¡Tu carrito está vacío!');
+        const urlMP = 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_LINK_MP';
+        window.open(urlMP,'_blank');
+    });
+</script>
+
 </body>
 </html>
