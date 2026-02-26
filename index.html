@@ -36,7 +36,6 @@ body { font-family: Arial; padding: 20px; background: #f9f9f9; }
 </div>
 
 <div id="productos">
-  <!-- Ejemplo productos -->
   <div class="producto" data-categoria="golosinas"><img src="imagenes/globo-bombuchas-x-100-un.jpg" alt=""><h3>Globo Bombuchas x100</h3><div class="precio">$2.000</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
   <div class="producto" data-categoria="jugos"><img src="imagenes/juguito-pepito-triple-sabor.jpg" alt=""><h3>Juguito Pepito triple sabor</h3><div class="precio">$700</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
   <div class="producto" data-categoria="alfajores"><img src="imagenes/alfajor-fulbito-chocolate.jpg" alt=""><h3>Alfajor Fulbito Chocolate</h3><div class="precio">$400</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
@@ -60,11 +59,7 @@ function filtrarProductos() {
   productos.forEach(producto => {
     const nombre = producto.querySelector('h3').textContent.toLowerCase();
     const categoria = producto.dataset.categoria;
-    if ((nombre.includes(texto)) && (categoriaActiva === 'todos' || categoria === categoriaActiva)) {
-      producto.style.display = 'block';
-    } else {
-      producto.style.display = 'none';
-    }
+    producto.style.display = (nombre.includes(texto) && (categoriaActiva === 'todos' || categoria === categoriaActiva)) ? 'block' : 'none';
   });
 }
 
@@ -78,13 +73,29 @@ botones.forEach(boton => {
 });
 
 // CARRITO
-const carrito = [];
+let carrito = [];
 const listaCarrito = document.getElementById('listaCarrito');
-const botonesAgregar = document.querySelectorAll('.agregar');
 
-botonesAgregar.forEach((btn, i) => {
+function actualizarCarrito() {
+  listaCarrito.innerHTML = '';
+  carrito.forEach((item, index) => {
+    const li = document.createElement('li');
+    li.textContent = `${item.nombre} - ${item.precio}`;
+    // Opción para eliminar del carrito
+    const eliminar = document.createElement('button');
+    eliminar.textContent = 'X';
+    eliminar.style.marginLeft = '10px';
+    eliminar.style.cursor = 'pointer';
+    eliminar.onclick = () => { carrito.splice(index,1); actualizarCarrito(); };
+    li.appendChild(eliminar);
+    listaCarrito.appendChild(li);
+  });
+}
+
+// AGREGAR PRODUCTOS
+document.querySelectorAll('.agregar').forEach(btn => {
   btn.addEventListener('click', () => {
-    const producto = productos[i];
+    const producto = btn.closest('.producto');
     const nombre = producto.querySelector('h3').textContent;
     const precio = producto.querySelector('.precio').textContent;
     carrito.push({nombre, precio});
@@ -92,24 +103,12 @@ botonesAgregar.forEach((btn, i) => {
   });
 });
 
-function actualizarCarrito() {
-  listaCarrito.innerHTML = '';
-  carrito.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = `${item.nombre} - ${item.precio}`;
-    listaCarrito.appendChild(li);
-  });
-}
-
-// ENVIAR POR WHATSAPP
-const enviarWhatsapp = document.getElementById('enviarWhatsapp');
-enviarWhatsapp.addEventListener('click', () => {
-  if(carrito.length === 0) return alert('El carrito está vacío');
+// ENVIAR A WHATSAPP
+document.getElementById('enviarWhatsapp').addEventListener('click', () => {
+  if(carrito.length === 0) { alert('El carrito está vacío'); return; }
   let mensaje = '¡Hola! Quiero comprar estos productos:\n';
-  carrito.forEach(item => {
-    mensaje += `- ${item.nombre} (${item.precio})\n`;
-  });
-  const telefono = '54911XXXXXXX'; // reemplaza con tu número de WhatsApp (ej: Argentina: 54911XXXXXXX)
+  carrito.forEach(item => { mensaje += `- ${item.nombre} (${item.precio})\n`; });
+  const telefono = '54911XXXXXXX'; // tu número de WhatsApp
   const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, '_blank');
 });
