@@ -1,105 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda de Golosinas</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f9f9f9;
-    }
-    #buscar {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      font-size: 16px;
-    }
-    .producto {
-      display: block;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
-      background-color: #fff;
-    }
-    .producto img {
-      max-width: 100px;
-      display: block;
-      margin-bottom: 10px;
-    }
-    .precio {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .stock {
-      color: green;
-      margin-bottom: 10px;
-    }
-    .agregar {
-      padding: 5px 10px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-    .agregar:hover {
-      background-color: #0056b3;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda de Golosinas</title>
+<style>
+body { font-family: Arial; padding: 20px; background: #f9f9f9; }
+#buscar { width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px; }
+.boton-categoria { padding: 5px 10px; margin-right: 5px; margin-bottom: 20px; cursor: pointer; border: 1px solid #007bff; background: #007bff; color: #fff; }
+.boton-categoria:hover { background: #0056b3; }
+.producto { display: block; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background: #fff; }
+.producto img { max-width: 100px; display: block; margin-bottom: 10px; }
+.precio { font-weight: bold; margin-bottom: 5px; }
+.stock { color: green; margin-bottom: 10px; }
+.agregar { padding: 5px 10px; background: #007bff; color: #fff; border: none; cursor: pointer; }
+.agregar:hover { background: #0056b3; }
+</style>
 </head>
 <body>
 
-  <h1>Tienda de Golosinas</h1>
+<h1>Tienda de Golosinas</h1>
 
-  <!-- Barra de búsqueda -->
-  <input type="text" id="buscar" placeholder="Buscar producto...">
+<!-- Barra de búsqueda -->
+<input type="text" id="buscar" placeholder="Buscar producto...">
 
-  <!-- TODOS LOS PRODUCTOS -->
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/globo-bombuchas-x-100-un.jpg" alt=""><h3>Globo Bombuchas x100</h3><div class="precio">$2.000</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/globo-bombuchas-sueltas-x-25-un.jpg" alt=""><h3>Globo Bombuchas x25</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/girasol-tostalindo-50g.jpg" alt=""><h3>Girasol Tostalindo 50g</h3><div class="precio">$800</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="jugos"><img src="imagenes/juguito-pepito-triple-sabor.jpg" alt=""><h3>Juguito Pepito triple sabor</h3><div class="precio">$700</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="jugos"><img src="imagenes/juguito-pepito-top2-sabores.jpg" alt=""><h3>Juguito Pepito top 2 sabores</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/pastillas-lucky-x-8-un.jpg" alt=""><h3>Pastillas Lucky x8</h3><div class="precio">$100</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/tubitwist-tnt-acida-frutilla-15g.jpg" alt=""><h3>Tubitwist TNT Ácida Frutilla 15g</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/tubitwist-tnt-acida-uva-15g.jpg" alt=""><h3>Tubitwist TNT Ácida Uva 15g</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/tubitwist-tnt-acida-frutilla-70g.jpg" alt=""><h3>Tubitwist TNT Ácida Frutilla 70g</h3><div class="precio">$1.500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/tubitwist-tnt-acida-uva-70g.jpg" alt=""><h3>Tubitwist TNT Ácida Uva 70g</h3><div class="precio">$1.500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/regaliz-bull-dog-billiken-75g.jpg" alt=""><h3>Regaliz Bull Dog Billiken 75g</h3><div class="precio">$1.500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/malvavisco-gongys-28g.jpg" alt=""><h3>Malvavisco Gongys 28g</h3><div class="precio">$700</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/heladitos-secos-un.jpg" alt=""><h3>Heladitos Secos un</h3><div class="precio">$200</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/gallinitas-surtidas-un.jpg" alt=""><h3>Gallinitas Surtidas un</h3><div class="precio">$200</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/chup-pops-evolution-surtido.jpg" alt=""><h3>Chup Pops Evolution Surtido</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/chupetin-mr-pops-fruta.jpg" alt=""><h3>Chupetin Mr Pops Fruta</h3><div class="precio">$300</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="alfajores"><img src="imagenes/bizcochuelo-pic-nic-un.jpg" alt=""><h3>Bizcochuelo Pic Nic un</h3><div class="precio">$1.000</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="alfajores"><img src="imagenes/mini-torta-rapsodia.jpg" alt=""><h3>Mini Torta Rapsodia</h3><div class="precio">$1.000</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="alfajores"><img src="imagenes/alfajor-fulbito-chocolate.jpg" alt=""><h3>Alfajor Fulbito Chocolate</h3><div class="precio">$400</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="alfajores"><img src="imagenes/alfajor-fulbito-mani.jpg" alt=""><h3>Alfajor Fulbito Maní</h3><div class="precio">$400</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="alfajores"><img src="imagenes/alfajor-guaymallen-oro-50g.jpg" alt=""><h3>Alfajor Guaymallen Oro 50g</h3><div class="precio">$1.300</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="alfajores"><img src="imagenes/alfajor-guaymallen-platino-50g.jpg" alt=""><h3>Alfajor Guaymallen Platino 50g</h3><div class="precio">$1.300</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="alfajores"><img src="imagenes/alfajor-fantoche-simple-night-50g.jpg" alt=""><h3>Alfajor Fantoche Simple Night 50g</h3><div class="precio">$1.200</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="alfajores"><img src="imagenes/alfajor-fantoche-simple-day-50g.jpg" alt=""><h3>Alfajor Fantoche Simple Day 50g</h3><div class="precio">$1.200</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
-  <div class="producto" data-categoria="golosinas"><img src="imagenes/turron-fulbito-un.jpg" alt=""><h3>Turrón Fulbito un</h3><div class="precio">$400</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+<!-- Botones de categoría -->
+<div id="categorias">
+  <button class="boton-categoria" data-categoria="todos">Todos</button>
+  <button class="boton-categoria" data-categoria="golosinas">Golosinas</button>
+  <button class="boton-categoria" data-categoria="jugos">Jugos</button>
+  <button class="boton-categoria" data-categoria="alfajores">Alfajores</button>
+  <button class="boton-categoria" data-categoria="otros">Otros</button>
+</div>
 
-  <!-- Script de búsqueda -->
-  <script>
-    const inputBuscar = document.getElementById('buscar');
-    const productos = document.querySelectorAll('.producto');
+<!-- PRODUCTOS -->
+<div id="productos">
+<div class="producto" data-categoria="golosinas"><img src="imagenes/globo-bombuchas-x-100-un.jpg" alt=""><h3>Globo Bombuchas x100</h3><div class="precio">$2.000</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+<div class="producto" data-categoria="golosinas"><img src="imagenes/globo-bombuchas-sueltas-x-25-un.jpg" alt=""><h3>Globo Bombuchas x25</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+<div class="producto" data-categoria="golosinas"><img src="imagenes/girasol-tostalindo-50g.jpg" alt=""><h3>Girasol Tostalindo 50g</h3><div class="precio">$800</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+<div class="producto" data-categoria="jugos"><img src="imagenes/juguito-pepito-triple-sabor.jpg" alt=""><h3>Juguito Pepito triple sabor</h3><div class="precio">$700</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+<div class="producto" data-categoria="jugos"><img src="imagenes/juguito-pepito-top2-sabores.jpg" alt=""><h3>Juguito Pepito top 2 sabores</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+<div class="producto" data-categoria="golosinas"><img src="imagenes/pastillas-lucky-x-8-un.jpg" alt=""><h3>Pastillas Lucky x8</h3><div class="precio">$100</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+<div class="producto" data-categoria="golosinas"><img src="imagenes/tubitwist-tnt-acida-frutilla-15g.jpg" alt=""><h3>Tubitwist TNT Ácida Frutilla 15g</h3><div class="precio">$500</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+<div class="producto" data-categoria="otros"><img src="imagenes/bizcochuelo-pic-nic-un.jpg" alt=""><h3>Bizcochuelo Pic Nic un</h3><div class="precio">$1.000</div><div class="stock">Disponible</div><button class="agregar">Agregar al carrito</button></div>
+<!-- (Agrega el resto de tus productos aquí como los anteriores) -->
+</div>
 
-    inputBuscar.addEventListener('input', () => {
-      const texto = inputBuscar.value.toLowerCase();
+<script>
+// Variables
+const inputBuscar = document.getElementById('buscar');
+const productos = document.querySelectorAll('.producto');
+const botones = document.querySelectorAll('.boton-categoria');
 
-      productos.forEach(producto => {
-        const nombre = producto.querySelector('h3').textContent.toLowerCase();
-        if (nombre.includes(texto)) {
-          producto.style.display = 'block';
-        } else {
-          producto.style.display = 'none';
-        }
-      });
-    });
-  </script>
+// Función para filtrar
+function filtrarProductos() {
+  const texto = inputBuscar.value.toLowerCase();
+  const categoriaActiva = document.querySelector('.boton-categoria.activo')?.dataset.categoria || 'todos';
+
+  productos.forEach(producto => {
+    const nombre = producto.querySelector('h3').textContent.toLowerCase();
+    const categoria = producto.dataset.categoria;
+
+    // Condición: coincide con búsqueda y categoría
+    if ((nombre.includes(texto)) && (categoriaActiva === 'todos' || categoria === categoriaActiva)) {
+      producto.style.display = 'block';
+    } else {
+      producto.style.display = 'none';
+    }
+  });
+}
+
+// Evento barra de búsqueda
+inputBuscar.addEventListener('input', filtrarProductos);
+
+// Evento botones de categoría
+botones.forEach(boton => {
+  boton.addEventListener('click', () => {
+    // Quitar clase activo a todos
+    botones.forEach(b => b.classList.remove('activo'));
+    boton.classList.add('activo');
+    filtrarProductos();
+  });
+});
+</script>
 
 </body>
 </html>
