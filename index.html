@@ -231,13 +231,13 @@
 
 <script>
     const data = [
-        { n: "Globo Bombuchas x100", p: 2000, i: "globo-bombuchas-x-100-un.jpg", c: "otros" },
+        { n: "Globo Bombuchas x100", p: 2000, i: "globo-bombuchas-x-100-un.jpg", c: "otros", disponible: true },
         { n: "Globo Bombuchas sueltas x25", p: 500, i: "globo-bombuchas-sueltas-x-25-un.jpg", c: "otros" },
         { n: "Girasol Tostalindo 50g", p: 800, i: "girasol-tostalindo-50g.jpg", c: "otros" },
         { n: "Juguito Pepito triple sabor", p: 700, i: "juguito-pepito-triple-sabor.jpg", c: "bebidas" },
         { n: "Juguito Pepito top 2 sabores", p: 500, i: "juguito-pepito-top2-sabores.jpg", c: "bebidas" },
         { n: "Pastillas Lucky x8 un.", p: 100, i: "pastillas-lucky-x-8-un.jpg", c: "golosinas" },
-        { n: "Tubitwist TNT Frutilla 15g", p: 500, i: "tubitwist-tnt-acida-frutilla-15g.jpg", c: "golosinas" },
+        { n: "Tubitwist TNT Frutilla 15g", p: 500, i: "tubitwist-tnt-acida-frutilla-15g.jpg", c: "golosinas", disponible: false }, // Sin stock },
         { n: "Tubitwist TNT Uva 15g", p: 500, i: "tubitwist-tnt-acida-uva-15g.jpg", c: "golosinas" },
         { n: "Tubitwist TNT Frutilla 70g", p: 1500, i: "tubitwist-tnt-acida-frutilla-70g.jpg", c: "golosinas" },
         { n: "Tubitwist TNT Uva 70g", p: 1500, i: "tubitwist-tnt-acida-uva-70g.jpg", c: "golosinas" },
@@ -280,25 +280,33 @@
     const grid = document.getElementById('productGrid');
 
     function render(filter = 'todos', search = '') {
-        grid.innerHTML = '';
-        const filtered = data.filter(p => {
-            const matchesCat = filter === 'todos' || p.c === filter;
-            const matchesSearch = p.n.toLowerCase().includes(search.toLowerCase());
-            return matchesCat && matchesSearch;
-        });
+    grid.innerHTML = '';
+    const filtered = data.filter(p => {
+        const matchesCat = filter === 'todos' || p.c === filter;
+        const matchesSearch = p.n.toLowerCase().includes(search.toLowerCase());
+        return matchesCat && matchesSearch;
+    });
 
-        filtered.forEach(p => {
-            grid.innerHTML += `
-                <div class="card">
-                    <img src="imagenes/${p.i}" onerror="this.src='https://via.placeholder.com/160?text=Golosina'">
-                    <div class="card-body">
-                        <p class="price">$${p.p}</p>
-                        <p class="name">${p.n}</p>
-                        <button class="add-btn" onclick="addToCart('${p.n}', ${p.p})">Añadir</button>
-                    </div>
-                </div>`;
-        });
-    }
+    filtered.forEach(p => {
+        // Verificamos si está disponible (si no dice nada, asumimos que sí)
+        const hayStock = p.disponible !== false;
+        
+        grid.innerHTML += `
+            <div class="card" style="${!hayStock ? 'border: 2px solid #ff4d4d; opacity: 0.8;' : ''}">
+                <img src="imagenes/${p.i}" onerror="this.src='https://via.placeholder.com/160?text=Golosina'" 
+                     style="${!hayStock ? 'filter: grayscale(1);' : ''}">
+                <div class="card-body">
+                    <p class="price" style="${!hayStock ? 'color: #ff4d4d;' : ''}">$${p.p}</p>
+                    <p class="name">${p.n} ${!hayStock ? '<b style="color: #ff4d4d;">(SIN STOCK)</b>' : ''}</p>
+                    
+                    ${hayStock 
+                        ? `<button class="add-btn" onclick="addToCart('${p.n}', ${p.p})">Añadir</button>` 
+                        : `<button class="add-btn" style="border-color: #ccc; color: #ccc; cursor: not-allowed;" disabled>Agotado</button>`
+                    }
+                </div>
+            </div>`;
+    });
+}
 
     function toggleCart() { document.getElementById('sidebar').classList.toggle('open'); }
 
