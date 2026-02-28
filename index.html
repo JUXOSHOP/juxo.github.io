@@ -169,27 +169,49 @@
                     </div>
                 </div>`;
             });
-        }
+}
 
-        function toggleCart() { document.getElementById('sidebar').classList.toggle('open'); }
-        function addToCart(n, p) { cart.push({name:n, price:p}); updateUI(); }
-        function updateUI() {
-            const list = document.getElementById('cart-list');
-            list.innerHTML = '';
-            let sum = 0;
-            cart.forEach(i => { sum += i.price; list.innerHTML += `<li>${i.name} <span>$${i.price}</span></li>`; });
-            document.getElementById('cart-count').innerText = cart.length;
-            document.getElementById('cart-total').innerText = `Total: $${sum}`;
-        }
 
-        function sendToWA() {
-            if(cart.length === 0) return alert('Vacío');
-            let msg = "Pedido Kiosco Júpiter:%0A";
-            cart.forEach(i => msg += `- ${i.name} ($${i.price})%0A`);
-            msg += "%0ATotal: $" + cart.reduce((a, b) => a + b.price, 0);
-            window.open(`https://wa.me/5492345548472?text=${msg}`);
-        }
 
+    function sendToWA() {
+
+        if(cart.length === 0) return alert('El carrito está vacío');
+
+        
+
+        // --- CONFIGURACIÓN DE TUS DATOS ---
+
+        const miNumero = "5492345548472"; 
+
+        const miAlias = "jupiter.d";
+
+        // ----------------------------------
+
+
+
+        let msg = "Hola! Mi pedido en Kiosco Júpiter es:%0A%0A";
+
+        cart.forEach(i => msg += `- ${i.name} ($${i.price})%0A`);
+
+        let total = cart.reduce((a, b) => a + b.price, 0);
+
+        
+
+        msg += "%0A*Total a pagar: $" + total + "*";
+
+        msg += "%0A%0A*¿Cómo confirmo?*";
+
+        msg += "%0A1️⃣ Transferí al Alias: *" + miAlias + "*";
+
+        msg += "%0A2️⃣ Enviame el comprobante por acá.";
+
+        msg += "%0A%0A⚠️ *¡Te reservo el pedido para que no se agote y lo pasás a retirar cuando quieras!* 🏃‍♂️💨";
+
+        
+
+        window.open(`https://wa.me/${miNumero}?text=${msg}`);
+
+    }
         function filterData(cat, el) {
             document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
