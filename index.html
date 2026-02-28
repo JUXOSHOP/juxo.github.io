@@ -191,6 +191,13 @@
         }
     </style>
 </head>
+    <link rel="manifest" href="manifest.json">
+194    <meta name="theme-color" content="#13c1ac">
+195    <script>
+196      if ('serviceWorker' in navigator) {
+197        navigator.serviceWorker.register('sw.js');
+198      }
+199    </script>
 <body>
 
 <header>
