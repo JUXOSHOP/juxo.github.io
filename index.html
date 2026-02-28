@@ -169,35 +169,47 @@
                     </div>
                 </div>`;
             });
-}
-        
-function sendToWA() {
-    if(cart.length === 0) return alert('El carrito está vacío');
-    
-    const miNumero = "5492345548472"; 
-    const miAlias = "jupiter.d";
+        }
 
-    // 1. Armamos el texto limpio primero
-    let texto = `Hola! Mi pedido en Kiosco Júpiter es:\n\n`;
-    
-    cart.forEach(i => {
-        texto += `- ${i.name} ($${i.price})\n`;
-    });
-    
-    let total = cart.reduce((a, b) => a + b.price, 0);
-    
-    texto += `\n*Total a pagar: $${total}*`;
-    texto += `\n\n*¿Cómo confirmo?*`;
-    texto += `\n1️⃣ Transferí al Alias: *${miAlias}*`;
-    texto += `\n2️⃣ Enviame el comprobante por acá.`;
-    texto += `\n\n⚠️ *¡Te reservo el pedido para que no se agote y lo pasás a retirar cuando quieras!* 🏃‍♂️💨`;
+        function toggleCart() { 
+            document.getElementById('sidebar').classList.toggle('open'); 
+        }
 
-    // 2. IMPORTANTE: Aquí codificamos todo el mensaje de una vez
-    const mensajeFinal = encodeURIComponent(texto);
-    
-    window.open(`https://wa.me/${miNumero}?text=${mensajeFinal}`);
-    
-}
+        function addToCart(n, p) { 
+            cart.push({name:n, price:p}); 
+            updateUI(); 
+        }
+
+        function updateUI() {
+            const list = document.getElementById('cart-list');
+            list.innerHTML = '';
+            let sum = 0;
+            cart.forEach((item, index) => {
+                sum += item.price;
+                list.innerHTML += `<li style="display:flex; justify-content:space-between; padding:5px 0;">
+                    ${item.name} <span>$${item.price}</span>
+                </li>`;
+            });
+            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('cart-total').innerText = `Total: $${sum}`;
+        }
+
+        function sendToWA() {
+            if(cart.length === 0) return alert('El carrito está vacío');
+            const miNumero = "5492345548472"; 
+            const miAlias = "jupiter.d";
+            let texto = `Hola! Mi pedido en Kiosco Júpiter es:\n\n`;
+            cart.forEach(i => { texto += `- ${i.name} ($${i.price})\n`; });
+            let total = cart.reduce((a, b) => a + b.price, 0);
+            texto += `\n*Total a pagar: $${total}*`;
+            texto += `\n\n*¿Cómo confirmo?*`;
+            texto += `\n1️⃣ Transferí al Alias: *${miAlias}*`;
+            texto += `\n2️⃣ Enviame el comprobante por acá.`;
+            texto += `\n\n⚠️ *¡Te reservo el pedido para que no se agote y lo pasás a retirar cuando quieras!* 🏃‍♂️💨`;
+            const mensajeFinal = encodeURIComponent(texto);
+            window.open(`https://wa.me/${miNumero}?text=${mensajeFinal}`);
+        }
+
         function filterData(cat, el) {
             document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
